@@ -24,14 +24,23 @@ int BTLV_encodeTlvObject(const BTLV_DataObject* const object, uint8_t* const tlv
     return -1;
 }
 
-void BTLV_printObject(const BTLV_DataObject* const object)
+int BTLV_printObject(const BTLV_DataObject* const object)
 {
     (void)object;
+
+    return -1;
 }
 
 void BTLV_depthFirstNavigateObject(const BTLV_DataObject* const object, const BTLV_objectPrintCallback printObjectCallback)
 {
     (void)object;
+    (void)printObjectCallback;
+}
+
+void BTLV_blockOfBytesNavigateObject(const uint8_t* const tlvObjectBuffer, const size_t objectBufferSize, const BTLV_objectPrintCallback printObjectCallback)
+{
+    (void)tlvObjectBuffer;
+    (void)objectBufferSize;
     (void)printObjectCallback;
 }
 
