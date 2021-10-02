@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Build and install paths
+build
+install
+
+# IDE configuration
+.vscode
+
+# Local personal work processes files
+TODO.txt
