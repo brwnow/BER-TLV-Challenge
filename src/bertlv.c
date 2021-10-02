@@ -1,8 +1,10 @@
 #include "bertlv.h"
 
+#include "btlvConfig.h"
+
 const char* BTLV_getVersion(void)
 {
-    return "0.0.0";
+    return BTLV_VERSION_MAJOR BTLV_VERSION_MINOR BTLV_VERSION_PATCH;
 }
 
 BTLV_DataObject* BTLV_decodeTlvObject(const uint8_t* const tlvObjectBuffer, const size_t objectBufferSize)
