@@ -74,7 +74,7 @@ typedef struct _DataObject {
     union {
         uint8_t *value;               /**< Pointer to bytes of value field */
         struct _DataObject *children; /**< Array of children data objects */
-    };
+    } valueField;
 } BTLV_DataObject;
 
 /**
