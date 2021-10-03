@@ -6,6 +6,8 @@ A library handful for parsing and printing BER-TLV objects.
 1. [Building](#building)
     - [Native Linux building](#native-linux-building)
     - [Cross-compiling building](#cross-compiling-building)
+1. [Documentation](#documentation)
+1. [Formating source code properly](#formating-source-code-properly)
 
 ## Building
 
@@ -31,3 +33,12 @@ If you have to change the contract of the API and need to update the documentati
 1. Update `PROJECT_NUMBER` in `doc/Doxyfile` to the new version of BTLV Lib
 1. At the root of BTLV Lib project folder, run `doxygen doc/Doxyfile`
 1. Commit everything that has been modified inside `doc/generated`
+
+## Formating source code properly
+
+You must install clang-format in order to use code formatting utilities of this project. It can be installed on Ubuntu by running `sudo apt install clang-format` on terminal.
+
+There is a `.clang-format` file with specifications for code style in the rootpath of the project. There are two scripts related to code linting, a script for checking the code format that presents a diff between current code format and expected code format, and a script that fixes the code format automatically (if you trust it won't break your code). Both scripts must be ran from project's rootpath.
+
+* Checking code format: `./scripts/checkFormat.sh`
+* Fixing code format: `./scripts/formatCodeFiles.sh`
