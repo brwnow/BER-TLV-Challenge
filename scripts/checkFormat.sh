@@ -7,8 +7,9 @@ showFileFormatIssues() {
     
     clang-format -style=file $1 > $TEMP_DIFF_FILE
 
-    if [ -s "$TEMP_DIFF_FILE" ]; then
-        diff -pu --color $1 $TEMP_DIFF_FILE
+    diff -pu --color $1 $TEMP_DIFF_FILE
+
+    if [ $? -ne 0 ]; then
         badFilesCounter=$(expr $badFilesCounter + 1)
     fi
 
@@ -25,13 +26,13 @@ do
     showFileFormatIssues $source
 done
 
-for source in $(find tests -name "*tests.*")
+for file in $(find tests -name "*tests.*")
 do
-    showFileFormatIssues $source
+    showFileFormatIssues $file
 done
 
 echo -e "\n"
 echo -e "----------------------------"
-echo -e "$badFilesCounter files bad formatted"
+echo -e "   $badFilesCounter files bad formatted"
 echo -e "----------------------------"
 echo -e "\n"
