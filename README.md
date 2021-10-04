@@ -3,16 +3,21 @@
 A library handful for parsing and printing BER-TLV objects.
 
 ## Summary
-1. [Building](#building)
+1. [Environment Setup](#environment-setup)
+2. [Building](#building)
     - [Info](#info)
     - [Options](#options)
     - [Native Linux building](#native-linux-building)
     - [Cross-compiling building](#cross-compiling-building)
     - [Installing](#installing)
-2. [Documentation](#documentation)
-3. [Formating source code properly](#formating-source-code-properly)
-4. [Testing](#testing)
+3. [Version Bumping](#version-bumping)
+4. [API Documentation](#api-documentation)
+5. [Formating source code properly](#formating-source-code-properly)
+6. [Testing](#testing)
 
+## Environment Setup
+
+TODO
 ## Building
 
 ### Info
@@ -40,7 +45,11 @@ There are build options that may be enabled/disabled through cmake CLI or cmake-
 
 The artifacts produced at the end of the building proccess are installed by default at the folder `install` located at the rootpath of BTLV project. It's possible to customize the install location by setting cmake's variable `CMAKE_INSTALL_PREFIX` through CLI or cmake-gui.
 
-## Documentation
+## Version Bumping
+
+TODO
+
+## API Documentation
 
 The BTLV Lib is documented with doxygen. The documentation is versioned together with the code everytime the API changes. You can check the documentation at the location `\doc\generated\html\index.html` whithin BTLV Lib project.
 
