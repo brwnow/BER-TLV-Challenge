@@ -67,12 +67,6 @@ DEFINE_STANDALONE_TEST_FUNC(blockOfBytesNavigateObject) {
 DEFINE_STANDALONE_TEST_FUNC(destroyTlvObjectNullptr) {
     BTLV_destroyTlvObject(NULL);
 
-    // Checking if crashes destroynig primitive data object
-    BTLV_destroyTlvObject();
-
-    // Checking if crashes destroying constructed data object
-    BTLV_destroyTlvObject();
-
     return MUNIT_OK;
 }
 
@@ -99,8 +93,8 @@ static MunitTest btlvTryingToCrashTests[] = {
     GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_depthFirstNavigateObject", depthFirstNavigateObject),
     GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_blockOfBytesNavigateObject", blockOfBytesNavigateObject),
     GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectNullptr", destroyTlvObjectNullptr),
-    GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectNullptr", destroyTlvObjectPrimitive),
-    GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectNullptr", destroyTlvObjectConstructed),
+    GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectPrimitive", destroyTlvObjectPrimitive),
+    GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectConstructed", destroyTlvObjectConstructed),
 
     TEST_FUNC_ARRAY_END
 };
