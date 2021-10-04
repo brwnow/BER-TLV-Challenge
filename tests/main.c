@@ -13,6 +13,9 @@ static const MunitSuite suite = {
 int main(int argc, char *argv[]) {
     int btlvTestSuitesCounter = 0;
     allTestSuites[btlvTestSuitesCounter++] = btlvVersionTestsGetSuite();
+    allTestSuites[btlvTestSuitesCounter++] = btlvTryingToCrashTestsGetSuite();
+    allTestSuites[btlvTestSuitesCounter++] = btlvParsingTestsGetSuite();
+    allTestSuites[btlvTestSuitesCounter++] = btlvPrintingTestsGetSuite();
 
     return munit_suite_main(&suite, NULL, argc, argv);
 }
