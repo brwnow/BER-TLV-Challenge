@@ -81,7 +81,7 @@ typedef struct _DataObject {
  * @brief Callback for printing data objects during a navigation through a tree of data objects
  *
  */
-typedef void (*BTLV_objectPrintCallback)(const BTLV_DataObject *const, const uint8_t nestingLevel);
+typedef BTLV_ObjectPrintCallbackRetVal (*BTLV_objectPrintCallback)(const BTLV_DataObject *const object, const uint8_t nestingLevel);
 
 /**
  * @brief Gets the string of BTLV lib full version
