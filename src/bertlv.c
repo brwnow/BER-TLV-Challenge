@@ -33,20 +33,24 @@ int BTLV_printObject(const BTLV_DataObject *const object)
     return -1;
 }
 
-void BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object,
+int BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object,
                                    const BTLV_objectPrintCallback printObjectCallback)
 {
     (void)object;
     (void)printObjectCallback;
+
+    return -1;
 }
 
-void BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
+int BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
                                      const size_t objectBufferSize,
                                      const BTLV_objectPrintCallback printObjectCallback)
 {
     (void)tlvObjectBuffer;
     (void)objectBufferSize;
     (void)printObjectCallback;
+
+    return -1;
 }
 
 void BTLV_destroyTlvObject(BTLV_DataObject *const object)

@@ -146,8 +146,11 @@ int BTLV_printObject(const BTLV_DataObject *const object);
  * @param[in] object Data object to be navigated.
  * @param[out] printObjectCallback callback to be called to print each data object of data object tree.
  *
+ * @return On success returns 0
+ * @return In failing, returns -1
+ *
  */
-void BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object,
+int BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object,
                                    const BTLV_objectPrintCallback printObjectCallback);
 
 /**
@@ -160,8 +163,11 @@ void BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object,
  * @param[in] objectBufferSize size in bytes of given buffer.
  * @param[out] printObjectCallback callback to be called to print each data object of data object tree.
  *
+ * @return On success returns 0
+ * @return In failing, returns -1
+ *
  */
-void BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
+int BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
                                      const size_t objectBufferSize,
                                      const BTLV_objectPrintCallback printObjectCallback);
 
