@@ -37,7 +37,7 @@
 // these following macos declare the test function itsel and pointers to itsel and its setup and teardown
 #define DECLARE_TEST_FUNC(funcName) static MunitResult GET_TEST_FUNC_NAME(funcName)( \
                                                             const MunitParameter params[] MUNIT_UNUSED, \
-                                                            void* user_data_or_fixture MUNIT_UNUSED )
+                                                            void* fixture MUNIT_UNUSED )
 #define DECLARE_TEST_FUNC_SETUP_PTR(funcName) static void* (*const GET_TEST_FUNC_SETUP_PTR(funcName))( \
                                                                 const MunitParameter params[] MUNIT_UNUSED, \
                                                                 void* user_data MUNIT_UNUSED )
@@ -61,8 +61,8 @@
     DECLARE_TEST_FUNC(funcName)
 
 // Macros to facilitate working with fixture array
-#define FIXTURE_CREATE(fixture, size) void *fixture = malloc(sizeof(void*) * size)
-#define FIXTURE_INDEX(fixture, index) (((void**)fixture)[index])
-#define FIXTURE_RETURN(fixture) return fixture
+#define FIXTURE_CREATE(size) void *fixture = malloc(sizeof(void*) * size)
+#define FIXTURE_INDEX(index) (((void**)fixture)[index])
+#define FIXTURE_RETURN return fixture
 
 #endif // BTLV_LIB_TESTS_DEFS_H

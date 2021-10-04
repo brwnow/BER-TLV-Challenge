@@ -6,7 +6,7 @@
 
 DEFINE_FULL_TEST_FUNC(btlvGetVersion, btlvVersionString) {
     const char *version = BTLV_getVersion();
-    const char *fixtureVersion = FIXTURE_INDEX(user_data_or_fixture, 0);
+    const char *fixtureVersion = FIXTURE_INDEX(0);
 
     munit_assert_ptr_not_null(version);
     munit_assert_string_equal(version, fixtureVersion);

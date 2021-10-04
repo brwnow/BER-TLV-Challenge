@@ -71,7 +71,7 @@ DEFINE_STANDALONE_TEST_FUNC(destroyTlvObjectNullptr) {
 }
 
 DEFINE_FULL_TEST_FUNC(destroyTlvObjectPrimitive, btlvPrimitiveDataObject) {
-    BTLV_DataObject *object = FIXTURE_INDEX(user_data_or_fixture, 0);
+    BTLV_DataObject *object = FIXTURE_INDEX(0);
 
     BTLV_destroyTlvObject(object);
 
@@ -79,7 +79,7 @@ DEFINE_FULL_TEST_FUNC(destroyTlvObjectPrimitive, btlvPrimitiveDataObject) {
 }
 
 DEFINE_FULL_TEST_FUNC(destroyTlvObjectConstructed, btlvConstructedDataObject) {
-    BTLV_DataObject *object = FIXTURE_INDEX(user_data_or_fixture, 0);
+    BTLV_DataObject *object = FIXTURE_INDEX(0);
 
     BTLV_destroyTlvObject(object);
 

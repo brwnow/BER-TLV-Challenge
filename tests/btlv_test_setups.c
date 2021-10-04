@@ -9,10 +9,10 @@
 DECLARE_SETUP_FUNC(btlvVersionString) {
     static char *btlvVersionStr = BTLV_VERSION_MAJOR "." BTLV_VERSION_MINOR "." BTLV_VERSION_PATCH;
 
-    FIXTURE_CREATE(fixture, 1);
-    FIXTURE_INDEX(fixture, 0) = btlvVersionStr;
+    FIXTURE_CREATE(1);
+    FIXTURE_INDEX(0) = btlvVersionStr;
 
-    FIXTURE_RETURN(fixture);
+    FIXTURE_RETURN;
 }
 
 DECLARE_TEARDOWN_FUNC(btlvVersionString) {
@@ -31,9 +31,9 @@ DECLARE_SETUP_FUNC(btlvPrimitiveDataObject) {
     dataObject->valueField.value = malloc(sizeof(uint8_t));
     dataObject->valueField.value[0] = 0x75;
 
-    FIXTURE_CREATE(fixture, 1);
-    FIXTURE_INDEX(fixture, 0) = dataObject;
-    FIXTURE_RETURN(fixture);
+    FIXTURE_CREATE(1);
+    FIXTURE_INDEX(0) = dataObject;
+    FIXTURE_RETURN;
 }
 
 DECLARE_TEARDOWN_FUNC(btlvPrimitiveDataObject) {
@@ -75,9 +75,9 @@ DECLARE_SETUP_FUNC(btlvConstructedDataObject) {
     child2->valueField.value = malloc(sizeof(uint8_t));
     child2->valueField.value[0] = 0x85;
 
-    FIXTURE_CREATE(fixture, 1);
-    FIXTURE_INDEX(fixture, 0) = dataObject;
-    FIXTURE_RETURN(fixture);
+    FIXTURE_CREATE(1);
+    FIXTURE_INDEX(0) = dataObject;
+    FIXTURE_RETURN;
 }
 
 DECLARE_TEARDOWN_FUNC(btlvConstructedDataObject) {
