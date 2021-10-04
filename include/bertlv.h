@@ -25,25 +25,29 @@ extern "C" {
 /**
  * @brief Return codes for BTLV Lib functions
  *
- * This enumeration is common to the whole BTLV lib API. When a function works fine, BTLV_RET_OK is the enumerator to use, and its value is zero for a reason, all 
- * error codes are negative, and all warning codes are greater than zero, so this way it's possible to check if it was error, warning or totally success in a easy
- * way, not knowing all possible return codes. This feature gives a lot of power to the lib's user, making it quite easy to take decisions based on a behavioral
- * interpretation of return codes.
+ * This enumeration is common to the whole BTLV lib API. When a function works fine, BTLV_RET_OK is the enumerator to
+ * use, and its value is zero for a reason, all error codes are negative, and all warning codes are greater than zero,
+ * so this way it's possible to check if it was error, warning or totally success in a easy way, not knowing all
+ * possible return codes. This feature gives a lot of power to the lib's user, making it quite easy to take decisions
+ * based on a behavioral interpretation of return codes.
  *
  */
 typedef enum {
     BTLV_RET_OK = 0, /**< Function exectued succesfully */
 
     BTLV_GENERIC_ERROR = BTLV_ERRORCODE_STARTING_VALUE, /**< An error occurred with no special interpretation. */
-    BTLV_INVALID_PARAMETER, /**< One or more parameters have invalid value. For example passin NULL to a parameter that cannot be NULL. */
-    BTLV_MEMORY_NOT_ENOUGH, /**< Function failed due to lack of free memory. It does happen for those functions that need to allocate heap memory. */
-    BTLV_SMALL_BUFFER, /**< Output buffer was not enough to encode the whole data object. */
-    BTLV_BAD_TLV_ENCODING, /**< Given encoded TLV byte block is encoded incorrectly. */
+    BTLV_INVALID_PARAMETER, /**< One or more parameters have invalid value. For example passin NULL to a parameter that
+                               cannot be NULL. */
+    BTLV_MEMORY_NOT_ENOUGH, /**< Function failed due to lack of free memory. It does happen for those functions that
+                               need to allocate heap memory. */
+    BTLV_SMALL_BUFFER,      /**< Output buffer was not enough to encode the whole data object. */
+    BTLV_BAD_TLV_ENCODING,  /**< Given encoded TLV byte block is encoded incorrectly. */
     BTLV_BAD_TLV_STRUCTURE, /**< Given BTLV_DataObject has an invalid structure for a TLV Data Object. */
     BTLV_OUTPUT_STREAM_MISSING, /**< No output stream available during printing function execution. */
-    BTLV_BAD_CALLBACK_COMMAND, /**< Some callback function returned an expected control code. */
+    BTLV_BAD_CALLBACK_COMMAND,  /**< Some callback function returned an expected control code. */
 
-    BTLV_PRINTING_BYTES_LOST = BTLV_WARNINGCODE_STARTING_VALUE /**< Some bytes were lost during printing operation. Output text is probably broken. */
+    BTLV_PRINTING_BYTES_LOST = BTLV_WARNINGCODE_STARTING_VALUE /**< Some bytes were lost during printing operation.
+                                                                  Output text is probably broken. */
 } BTLV_ReturnCode;
 
 /**
@@ -108,7 +112,8 @@ typedef struct _DataObject {
  * @brief Callback for printing data objects during a navigation through a tree of data objects
  *
  */
-typedef BTLV_ObjectPrintCallbackRetVal (*BTLV_objectPrintCallback)(const BTLV_DataObject *const object, const uint8_t nestingLevel);
+typedef BTLV_ObjectPrintCallbackRetVal (*BTLV_objectPrintCallback)(const BTLV_DataObject *const object,
+                                                                   const uint8_t nestingLevel);
 
 /**
  * @brief Gets the string of BTLV lib full version
@@ -116,7 +121,8 @@ typedef BTLV_ObjectPrintCallbackRetVal (*BTLV_objectPrintCallback)(const BTLV_Da
  * @return Returns a string representing the BTLV lib version formatted as MAJOR.MINOR.PATCH
  *
  */
-const char *BTLV_getVersion(void);
+const char *
+BTLV_getVersion(void);
 
 /**
  * @brief Decode a BER-TLV data object to a tree of TLV data objects.
@@ -134,7 +140,10 @@ const char *BTLV_getVersion(void);
  * @return Returns BTLV_BAD_TLV_ENCODING if input TLV object byte block is bad encoded.
  *
  */
-BTLV_ReturnCode BTLV_decodeTlvObject(const uint8_t *const tlvObjectBuffer, const size_t objectBufferSize, BTLV_DataObject **decodedObject);
+BTLV_ReturnCode
+BTLV_decodeTlvObject(const uint8_t *const tlvObjectBuffer,
+                     const size_t objectBufferSize,
+                     BTLV_DataObject **decodedObject);
 
 /**
  * @brief Encode a BER-TLV data object from tree of objects to block of bytes.
@@ -152,9 +161,10 @@ BTLV_ReturnCode BTLV_decodeTlvObject(const uint8_t *const tlvObjectBuffer, const
  * @return Returns BTLV_BAD_TLV_STRUCTURE if input TLV object tree is bad constructed.
  *
  */
-BTLV_ReturnCode BTLV_encodeTlvObject(const BTLV_DataObject *const object,
-                         uint8_t *const tlvObjectBuffer,
-                         const size_t objectBufferSize);
+BTLV_ReturnCode
+BTLV_encodeTlvObject(const BTLV_DataObject *const object,
+                     uint8_t *const tlvObjectBuffer,
+                     const size_t objectBufferSize);
 
 /**
  * @brief Standard data object printing function.
@@ -167,10 +177,12 @@ BTLV_ReturnCode BTLV_encodeTlvObject(const BTLV_DataObject *const object,
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
  * @return Returns BTLV_OUTPUT_STREAM_MISSING if there is no output stream available.
- * @return Returns BTLV_PRINTING_BYTES_LOST if it was possible to print part of data object, but some parts were lost during printing.
+ * @return Returns BTLV_PRINTING_BYTES_LOST if it was possible to print part of data object, but some parts were lost
+ * during printing.
  *
  */
-BTLV_ReturnCode BTLV_printObject(const BTLV_DataObject *const object);
+BTLV_ReturnCode
+BTLV_printObject(const BTLV_DataObject *const object);
 
 /**
  * @brief Navigates through a tree of data objects using the depth first approach.
@@ -183,12 +195,13 @@ BTLV_ReturnCode BTLV_printObject(const BTLV_DataObject *const object);
  *
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
- * @return Returns BTLV_BAD_TLV_STRUCTURE if input TLV object tree is bad constructed and it's impossible to navigate correctly through it.
+ * @return Returns BTLV_BAD_TLV_STRUCTURE if input TLV object tree is bad constructed and it's impossible to navigate
+ * correctly through it.
  * @return Returns BTLV_BAD_CALLBACK_COMMAND if callback function returns a control code that is unexpected.
  *
  */
-BTLV_ReturnCode BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object,
-                                   const BTLV_objectPrintCallback printObjectCallback);
+BTLV_ReturnCode
+BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object, const BTLV_objectPrintCallback printObjectCallback);
 
 /**
  * @brief Navigates through data objects encoded in a block of bytes
@@ -202,13 +215,15 @@ BTLV_ReturnCode BTLV_depthFirstNavigateObject(const BTLV_DataObject *const objec
  *
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
- * @return Returns BTLV_BAD_TLV_ENCODING if input TLV data object byte block is bad encoded and it's impossible to navigate correctly through it.
+ * @return Returns BTLV_BAD_TLV_ENCODING if input TLV data object byte block is bad encoded and it's impossible to
+ * navigate correctly through it.
  * @return Returns BTLV_BAD_CALLBACK_COMMAND if callback function returns a control code that is unexpected.
  *
  */
-BTLV_ReturnCode BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
-                                     const size_t objectBufferSize,
-                                     const BTLV_objectPrintCallback printObjectCallback);
+BTLV_ReturnCode
+BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
+                                const size_t objectBufferSize,
+                                const BTLV_objectPrintCallback printObjectCallback);
 
 /**
  * @brief Try to recusively free data object properly and safely.
@@ -216,7 +231,8 @@ BTLV_ReturnCode BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBu
  * @param object Reference to the data object that must be deallocated.
  *
  */
-void BTLV_destroyTlvObject(BTLV_DataObject *const object);
+void
+BTLV_destroyTlvObject(BTLV_DataObject *const object);
 
 #ifdef __cplusplus
 }

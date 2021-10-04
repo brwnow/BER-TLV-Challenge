@@ -1,10 +1,11 @@
 #include "testsdefs.h"
 
 #include "bertlv.h"
-#include "btlv_tests.h"
 #include "btlv_test_setups.h"
+#include "btlv_tests.h"
 
-DEFINE_FULL_TEST_FUNC(btlvGetVersion, btlvVersionString) {
+DEFINE_FULL_TEST_FUNC(btlvGetVersion, btlvVersionString)
+{
     const char *version = BTLV_getVersion();
     const char *fixtureVersion = FIXTURE_INDEX(0);
 
@@ -14,20 +15,14 @@ DEFINE_FULL_TEST_FUNC(btlvGetVersion, btlvVersionString) {
     return MUNIT_OK;
 }
 
-static MunitTest btlvVersionTests[] = {
-    GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_getVersion", btlvGetVersion),
+static MunitTest btlvVersionTests[] = {GET_TEST_FUNC_ARRAY_ENTRY("/BTLV_getVersion", btlvGetVersion),
 
-    TEST_FUNC_ARRAY_END
-};
+                                       TEST_FUNC_ARRAY_END};
 
-static MunitSuite btlvVersionTestsSuite = {
-    "/version",
-    btlvVersionTests,
-    NULL,
-    1,
-    MUNIT_SUITE_OPTION_NONE
-};
+static MunitSuite btlvVersionTestsSuite = {"/version", btlvVersionTests, NULL, 1, MUNIT_SUITE_OPTION_NONE};
 
-MunitSuite btlvVersionTestsGetSuite(void) {
+MunitSuite
+btlvVersionTestsGetSuite(void)
+{
     return btlvVersionTestsSuite;
 }
