@@ -10,3 +10,7 @@ do
     clang-format -i -style=file $source
 done
 
+for source in $(find tests -name "*tests.*")
+do
+    showFileFormatIssues $source
+done
