@@ -55,6 +55,9 @@ if(${BUILD_UNIT_TESTS})
         ${MUNIT_FRAMEWORK_SOURCES_PATH}/munit.c
         ${UNIT_TESTS_SOURCES_PATHS}/btlv_test_setups.c
         ${UNIT_TESTS_SOURCES_PATHS}/btlv_version_tests.c
+        ${UNIT_TESTS_SOURCES_PATHS}/btlv_trytocrash_tests.c
+        ${UNIT_TESTS_SOURCES_PATHS}/btlv_parsing_tests.c
+        ${UNIT_TESTS_SOURCES_PATHS}/btlv_printing_tests.c
         ${UNIT_TESTS_SOURCES_PATHS}/main.c
     )
 
