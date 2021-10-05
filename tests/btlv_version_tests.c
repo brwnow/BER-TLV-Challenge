@@ -15,8 +15,9 @@ DECLARE_TEST_FUNC(btlvGetVersion)
     return MUNIT_OK;
 }
 
-static MunitTest btlvVersionTests[] = {GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_getVersion", btlvGetVersion, btlvVersionString),
-                                       TEST_FUNC_ARRAY_END};
+static MunitTest btlvVersionTests[] = {
+    GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_getVersion", btlvGetVersion, btlvVersionString),
+    TEST_FUNC_ARRAY_END};
 
 static MunitSuite btlvVersionTestsSuite = {"/version", btlvVersionTests, NULL, 1, MUNIT_SUITE_OPTION_NONE};
 

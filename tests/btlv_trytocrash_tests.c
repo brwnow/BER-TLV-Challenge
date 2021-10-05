@@ -103,8 +103,12 @@ static MunitTest btlvTryingToCrashTests[] = {
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_depthFirstNavigateObject", depthFirstNavigateObject),
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_blockOfBytesNavigateObject", blockOfBytesNavigateObject),
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectNullptr", destroyTlvObjectNullptr),
-    GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectPrimitive", destroyTlvObjectPrimitive, btlvPrimitiveDataObject),
-    GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectConstructed", destroyTlvObjectConstructed, btlvPrimitiveDataObject),
+    GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectPrimitive",
+                                   destroyTlvObjectPrimitive,
+                                   btlvPrimitiveDataObject),
+    GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectConstructed",
+                                   destroyTlvObjectConstructed,
+                                   btlvPrimitiveDataObject),
 
     TEST_FUNC_ARRAY_END};
 
