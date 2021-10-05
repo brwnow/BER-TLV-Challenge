@@ -2,6 +2,13 @@
 
 badFilesCounter=0
 
+exitWithError() {
+    echo -e "checkFormat failed to execute\n"
+    echo -e "reason: $1"
+
+    exit 1
+}
+
 showFileFormatIssues() {
     TEMP_DIFF_FILE="${1}.tempdiff"
     
@@ -15,6 +22,13 @@ showFileFormatIssues() {
 
     rm -f $TEMP_DIFF_FILE
 }
+
+# Checking if clang-format is available
+clang-format --version 2>/dev/null
+
+if [ $? -ne 0 ]; then
+    exitWithError "clang-format command is need and was not found."
+fi
 
 for header in $(find include -name "*.h")
 do
