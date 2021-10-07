@@ -133,11 +133,13 @@ BTLV_getVersion(void);
  * @param[in] tlvObjectBuffer The address of the BER-TLV data object block of bytes in memory.
  * @param[in] objectBufferSize Size of the data object block of bytes.
  * @param[out] decodedObject Output parameter where to return the address of decoded data object.
+ * In case of failing to decode the object, outputs NULL.
  *
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
  * @return Returns BTLV_MEMORY_NOT_ENOUGH if it fails allocating memory during decoding of TLV object byte block.
- * @return Returns BTLV_BAD_TLV_ENCODING if input TLV object byte block is bad encoded.
+ * @return Returns BTLV_BAD_TLV_ENCODING if input TLV object byte block is bad encoded and the function
+ * fails to decode it.
  *
  */
 BTLV_ReturnCode
