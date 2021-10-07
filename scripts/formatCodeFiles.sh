@@ -8,7 +8,7 @@ exitWithError() {
 }
 
 # Checking if clang-format is available
-clang-format --version 2>/dev/null
+clang-format --version 2>&1 1>/dev/null
 
 if [ $? -ne 0 ]; then
     exitWithError "clang-format command is need and was not found."
