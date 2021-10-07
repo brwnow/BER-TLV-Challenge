@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['btlv_5fbad_5fcallback_5fcommand',['BTLV_BAD_CALLBACK_COMMAND',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba5dd6d88029f3121d34b01c86a9a9494c',1,'bertlv.h']]],
+  ['btlv_5fbad_5ftlv_5fencoding',['BTLV_BAD_TLV_ENCODING',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba5f9dc6156f877615bb174a50f2bd42cc',1,'bertlv.h']]],
+  ['btlv_5fbad_5ftlv_5fstructure',['BTLV_BAD_TLV_STRUCTURE',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baff15d521197dd040e85484d76978d85d',1,'bertlv.h']]],
   ['btlv_5fclass_5fapplication',['BTLV_CLASS_APPLICATION',['../bertlv_8h.html#a81b0e867427b7599dce580cf65c53be6accc8764ad7ded27e5b3add44fb7d1e5c',1,'bertlv.h']]],
   ['btlv_5fclass_5fcontext_5fspecific',['BTLV_CLASS_CONTEXT_SPECIFIC',['../bertlv_8h.html#a81b0e867427b7599dce580cf65c53be6a5c6ff8f6e51e73f1ba7de93e695b04f1',1,'bertlv.h']]],
   ['btlv_5fclass_5fprivate',['BTLV_CLASS_PRIVATE',['../bertlv_8h.html#a81b0e867427b7599dce580cf65c53be6acb90a5f659ffa6b843f6d0f271e7ceeb',1,'bertlv.h']]],
@@ -8,5 +11,12 @@ var searchData=
   ['btlv_5fdepth_5fnavigation_5fstep_5finto',['BTLV_DEPTH_NAVIGATION_STEP_INTO',['../bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aaa8e05cec58bb69a909bc72faf6b0b021',1,'bertlv.h']]],
   ['btlv_5fdepth_5fnavigation_5fstep_5fout',['BTLV_DEPTH_NAVIGATION_STEP_OUT',['../bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aa674f328762f7108a632aaeb8c787ad74',1,'bertlv.h']]],
   ['btlv_5fdepth_5fnavigation_5fstep_5fover',['BTLV_DEPTH_NAVIGATION_STEP_OVER',['../bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aa26472b2fc881f49a2c129be54b6cf03c',1,'bertlv.h']]],
-  ['btlv_5fprimitive',['BTLV_PRIMITIVE',['../bertlv_8h.html#a93b58b13d1f4ecdaf10fb1c6615f0de5a37e920ef398065e36d403d512f518ad8',1,'bertlv.h']]]
+  ['btlv_5fgeneric_5ferror',['BTLV_GENERIC_ERROR',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba1ec55fc80642a9698115588b8920e84d',1,'bertlv.h']]],
+  ['btlv_5finvalid_5fparameter',['BTLV_INVALID_PARAMETER',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baefcda45362b385fcd9bd29b33b233dc3',1,'bertlv.h']]],
+  ['btlv_5fmemory_5fnot_5fenough',['BTLV_MEMORY_NOT_ENOUGH',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6bad480f2e0bacf767721df6eee4601c4aa',1,'bertlv.h']]],
+  ['btlv_5foutput_5fstream_5fmissing',['BTLV_OUTPUT_STREAM_MISSING',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baa38b40c210cb0ab0e8d2dfccba905909',1,'bertlv.h']]],
+  ['btlv_5fprimitive',['BTLV_PRIMITIVE',['../bertlv_8h.html#a93b58b13d1f4ecdaf10fb1c6615f0de5a37e920ef398065e36d403d512f518ad8',1,'bertlv.h']]],
+  ['btlv_5fprinting_5fbytes_5flost',['BTLV_PRINTING_BYTES_LOST',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba7bdea06a4d458952c1e3b79c4de69521',1,'bertlv.h']]],
+  ['btlv_5fret_5fok',['BTLV_RET_OK',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba8f71a0a7cfbe90ca85548f58875813dc',1,'bertlv.h']]],
+  ['btlv_5fsmall_5fbuffer',['BTLV_SMALL_BUFFER',['../bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baa325a1a168cc541f9cd791415833f9f2',1,'bertlv.h']]]
 ];
