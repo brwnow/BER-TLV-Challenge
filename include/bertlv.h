@@ -100,7 +100,7 @@ typedef struct _DataObject {
     uint8_t tag[BTLV_TAG_MAX_SIZE]; /**< Content data of TAG */
     size_t tagSize;                 /**< TAG content data size in bytes */
     size_t length;                  /**< Length of value field in bytes */
-    uint32_t childObjectsCount;     /**< For constructed data objects, amount of children data objects */
+    size_t childObjectsCount;       /**< For constructed data objects, amount of children data objects */
 
     union {
         uint8_t *value;               /**< Pointer to bytes of value field */
