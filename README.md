@@ -3,28 +3,53 @@
 A library handful for parsing and printing BER-TLV objects.
 
 ## Summary
-1. [Building](#building)
+1. [Environment Setup](#environment-setup)
+2. [Building](#building)
+    - [Info](#info)
+    - [Options](#options)
     - [Native Linux building](#native-linux-building)
     - [Cross-compiling building](#cross-compiling-building)
-1. [Documentation](#documentation)
-1. [Formating source code properly](#formating-source-code-properly)
+    - [Installing](#installing)
+3. [Version Bumping](#version-bumping)
+4. [API Documentation](#api-documentation)
+5. [Formating source code properly](#formating-source-code-properly)
+6. [Testing](#testing)
 
+## Environment Setup
+
+TODO
 ## Building
 
-BTLV Lib build is based on camke. This build was tested for cmake 3.16, for this reason this version is set as minimum  required, which doesn't mean it wont work on older cmake versions. Also it was tested for Linux (Ubuntu 20.04) on x86 archtecture and gcc 9.3.0
+### Info
+
+BTLV Lib build is based on camke. This build was tested for cmake 3.16, for this reason this version is set as minimum  required, which doesn't mean it wont work on older cmake versions. Also it was tested for Linux (Ubuntu 20.04) on x86 archtecture, compiled and linked with gcc 9.3.0
+
+### Options
+
+There are build options that may be enabled/disabled through cmake CLI or cmake-gui. Following there is a list of build options and a briefing explanation about them
+
+* `BUILD_UNIT_TESTS` Option to enable/disable build of unit tests. This option is `OFF` by default.
 
 ### Native Linux building
 
 1. Create a `build` folder within BTLV project root path `mkdir build` + `cd build`
-1. Generate the Makefile running `cmake ..`
-1. Compile and link binaries running `cmake --build .`
-1. Install final build binaries and headers running `cmake --install`
+1. Generate the Makefile running `cmake ..` or `cmake-gui ..`
+1. Compile and link binaries running `make`
+1. Install final build binaries and headers running `make install`
 
 ### Cross-compiling building
 
 1. TODO
 
-## Documentation
+### Installing
+
+The artifacts produced at the end of the building proccess are installed by default at the folder `install` located at the rootpath of BTLV project. It's possible to customize the install location by setting cmake's variable `CMAKE_INSTALL_PREFIX` through CLI or cmake-gui.
+
+## Version Bumping
+
+TODO
+
+## API Documentation
 
 The BTLV Lib is documented with doxygen. The documentation is versioned together with the code everytime the API changes. You can check the documentation at the location `\doc\generated\html\index.html` whithin BTLV Lib project.
 
@@ -42,3 +67,7 @@ There is a `.clang-format` file with specifications for code style in the rootpa
 
 * Checking code format: `./scripts/checkFormat.sh`
 * Fixing code format: `./scripts/formatCodeFiles.sh`
+
+## Testing
+
+There are unit tests implemented for most of BTLV Lib functions. In order to test your additions on lib's code, you must build unit tests (see instructions at section [Building](#building)) and install it (see [Installing](#installing)). At install folder, you can find unit tests executable at `tests` folder. Run `unitTests` and check it out the result of unit tests run.
