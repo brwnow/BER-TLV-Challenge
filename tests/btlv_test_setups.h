@@ -12,6 +12,96 @@ DECLARE_SETUP_FUNC(btlvVersionString);
 DECLARE_TEARDOWN_FUNC(btlvVersionString);
 
 // =======================
+/* Only TAG field with class of universal type
+ *
+ * fixture format: pointer to a single byte holding a TAG
+ */
+DECLARE_SETUP_FUNC(btlvUniversalClassDataObject);
+DECLARE_TEARDOWN_FUNC(btlvUniversalClassDataObject);
+
+// =======================
+/* Only TAG field with class of application type
+ *
+ * fixture format: pointer to a single byte holding a TAG
+ */
+DECLARE_SETUP_FUNC(btlvApplicationClassDataObject);
+DECLARE_TEARDOWN_FUNC(btlvApplicationClassDataObject);
+
+// =======================
+/* Only TAG field with class of context-specific type
+ *
+ * fixture format: pointer to a single byte holding a TAG
+ */
+DECLARE_SETUP_FUNC(btlvContextSpecificClassDataObject);
+DECLARE_TEARDOWN_FUNC(btlvContextSpecificClassDataObject);
+
+// =======================
+/* Only TAG field with class of private type
+ *
+ * fixture format: pointer to a single byte holding a TAG
+ */
+DECLARE_SETUP_FUNC(btlvPrivateClassDataObject);
+DECLARE_TEARDOWN_FUNC(btlvPrivateClassDataObject);
+
+// =======================
+/* Only TAG field with of type primitive
+ *
+ * fixture format: pointer to a single byte holding a TAG
+ */
+DECLARE_SETUP_FUNC(btlvTagPrimitiveTypeDataObject);
+DECLARE_TEARDOWN_FUNC(btlvTagPrimitiveTypeDataObject);
+
+// =======================
+/* Only TAG field with of type constructed
+ *
+ * fixture format: pointer to a single byte holding a TAG
+ */
+DECLARE_SETUP_FUNC(btlvTagConstructedTypeDataObject);
+DECLARE_TEARDOWN_FUNC(btlvTagConstructedTypeDataObject);
+
+// =======================
+/* Only LENGTH field 1-byte long
+ *
+ * fixture format: pointer to a single byte holding a LENGTH
+ */
+DECLARE_SETUP_FUNC(btlvLengthFieldSingleByteDataObject);
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldSingleByteDataObject);
+
+// =======================
+/* Only LENGTH field 2 bytes long
+ *
+ * fixture format: pointer to two bytes holding a LENGTH
+ */
+DECLARE_SETUP_FUNC(btlvLengthFieldTwoBytesDataObject);
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldTwoBytesDataObject);
+
+// =======================
+/* Only LENGTH field 3 bytes long
+ *
+ * fixture format: pointer to 3 bytes holding a LENGTH
+ * which is enough to fill up 16 bits integer type
+ */
+DECLARE_SETUP_FUNC(btlvLengthFieldFillShortIntDataObject);
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldFillShortIntDataObject);
+
+// =======================
+/* Only LENGTH field 10 bytes long
+ *
+ * fixture format: pointer to 10 bytes holding a LENGTH
+ * which is enough to cause overflow on 64 bits integer types
+ */
+DECLARE_SETUP_FUNC(btlvLengthFieldForceOverflowDataObject);
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldForceOverflowDataObject);
+
+// =======================
+/* Only LENGTH field, bad encoded
+ *
+ * fixture format: pointer to bad encoded length field byte block
+ */
+DECLARE_SETUP_FUNC(btlvLengthFieldForceBadEncodedDataObject);
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldForceBadEncodedDataObject);
+
+// =======================
 /* TLV data object of type primitive
  *
  * fixture format: pointer to a BTLV_DataObject primitive

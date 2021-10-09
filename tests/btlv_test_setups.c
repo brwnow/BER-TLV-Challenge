@@ -19,6 +19,206 @@ DECLARE_TEARDOWN_FUNC(btlvVersionString) {
     free(fixture);
 }
 
+DECLARE_SETUP_FUNC(btlvUniversalClassDataObject) {
+    static uint8_t tagUniversalClass = 0x21;
+    static BTLV_ObjectClass expectedResult = BTLV_CLASS_UNIVERSAL;
+
+    FIXTURE_CREATE(2);
+    FIXTURE_INDEX(0) = &tagUniversalClass;
+    FIXTURE_INDEX(1) = &expectedResult;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvUniversalClassDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvApplicationClassDataObject) {
+    static uint8_t tagUniversalClass = 0x61;
+    static BTLV_ObjectClass expectedResult = BTLV_CLASS_APPLICATION;
+
+    FIXTURE_CREATE(2);
+    FIXTURE_INDEX(0) = &tagUniversalClass;
+    FIXTURE_INDEX(1) = &expectedResult;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvApplicationClassDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvContextSpecificClassDataObject) {
+    static uint8_t tagUniversalClass = 0xA1;
+    static BTLV_ObjectClass expectedResult = BTLV_CLASS_CONTEXT_SPECIFIC;
+
+    FIXTURE_CREATE(2);
+    FIXTURE_INDEX(0) = &tagUniversalClass;
+    FIXTURE_INDEX(1) = &expectedResult;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvContextSpecificClassDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvPrivateClassDataObject) {
+    static uint8_t tagUniversalClass = 0xE1;
+    static BTLV_ObjectClass expectedResult = BTLV_CLASS_PRIVATE;
+
+    FIXTURE_CREATE(2);
+    FIXTURE_INDEX(0) = &tagUniversalClass;
+    FIXTURE_INDEX(1) = &expectedResult;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvPrivateClassDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvTagPrimitiveTypeDataObject) {
+    static uint8_t tagPrimitiveType = 0xC1;
+    static BTLV_ObjectType expectedResult = BTLV_PRIMITIVE;
+
+    FIXTURE_CREATE(2);
+    FIXTURE_INDEX(0) = &tagPrimitiveType;
+    FIXTURE_INDEX(1) = &expectedResult;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvTagPrimitiveTypeDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvTagConstructedTypeDataObject) {
+    static uint8_t tagConstructedType = 0xE1;
+    static BTLV_ObjectType expectedResult = BTLV_CONSTRUCTED;
+
+    FIXTURE_CREATE(2);
+    FIXTURE_INDEX(0) = &tagConstructedType;
+    FIXTURE_INDEX(1) = &expectedResult;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvTagConstructedTypeDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvLengthFieldSingleByteDataObject) {
+    static uint8_t lengthByte = 0x7F;
+    static size_t fieldSize = 1;
+    static BTLV_ReturnCode expectedRet = BTLV_RET_OK;
+    static size_t expectedLength = 127;
+    static size_t expectedBytesCount = 1;
+
+    FIXTURE_CREATE(3);
+    FIXTURE_INDEX(0) = &lengthByte;
+    FIXTURE_INDEX(1) = &fieldSize;
+    FIXTURE_INDEX(2) = &expectedRet;
+    FIXTURE_INDEX(3) = &expectedLength;
+    FIXTURE_INDEX(4) = &expectedBytesCount;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldSingleByteDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvLengthFieldTwoBytesDataObject) {
+    static uint8_t lengthByte[] = { 0x81, 0x80};
+    static size_t fieldSize = 2;
+    static BTLV_ReturnCode expectedRet = BTLV_RET_OK;
+    static size_t expectedLength = 128;
+    static size_t expectedBytesCount = 2;
+
+    FIXTURE_CREATE(3);
+    FIXTURE_INDEX(0) = &lengthByte;
+    FIXTURE_INDEX(1) = &fieldSize;
+    FIXTURE_INDEX(2) = &expectedRet;
+    FIXTURE_INDEX(3) = &expectedLength;
+    FIXTURE_INDEX(4) = &expectedBytesCount;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldTwoBytesDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvLengthFieldFillShortIntDataObject) {
+    static uint8_t lengthByte[] = { 0x82, 0xAA, 0x55, 0xDE, 0x6F };
+    static size_t fieldSize = 5;
+    static BTLV_ReturnCode expectedRet = BTLV_RET_OK;
+    static size_t expectedLength = 43605;
+    static size_t expectedBytesCount = 3;
+
+    FIXTURE_CREATE(3);
+    FIXTURE_INDEX(0) = &lengthByte;
+    FIXTURE_INDEX(1) = &fieldSize;
+    FIXTURE_INDEX(2) = &expectedRet;
+    FIXTURE_INDEX(3) = &expectedLength;
+    FIXTURE_INDEX(4) = &expectedBytesCount;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldFillShortIntDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvLengthFieldForceOverflowDataObject) {
+    static uint8_t lengthByte[] = { 0x89, 0xFE, 0x45, 0x32, 0x99, 0x5D, 0xA3, 0xF1, 0x89, 0x44};
+    static size_t fieldSize = sizeof(lengthByte) / sizeof(uint8_t);
+    static BTLV_ReturnCode expectedRet = BTLV_TYPE_OVERFLOW;
+    static size_t expectedBytesCount = 10;
+
+#if defined(__x86_64__) || defined(__ppc64__)
+    static size_t expectedLength = 0x4532995DA3F18944;
+#else
+    static size_t expectedLength = 0xA3F18944;
+#endif
+
+    FIXTURE_CREATE(3);
+    FIXTURE_INDEX(0) = &lengthByte;
+    FIXTURE_INDEX(1) = &fieldSize;
+    FIXTURE_INDEX(2) = &expectedRet;
+    FIXTURE_INDEX(3) = &expectedLength;
+    FIXTURE_INDEX(4) = &expectedBytesCount;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldForceOverflowDataObject) {
+    free(fixture);
+}
+
+DECLARE_SETUP_FUNC(btlvLengthFieldForceBadEncodedDataObject) {
+    static uint8_t lengthByte[] = { 0x84, 0xAA, 0x55, 0xDE, 0x6F };
+    static size_t fieldSize = 3;
+    static BTLV_ReturnCode expectedRet = BTLV_BAD_TLV_ENCODING;
+    static size_t expectedLength = 0;
+    static size_t expectedBytesCount = 3;
+
+    FIXTURE_CREATE(3);
+    FIXTURE_INDEX(0) = &lengthByte;
+    FIXTURE_INDEX(1) = &fieldSize;
+    FIXTURE_INDEX(2) = &expectedRet;
+    FIXTURE_INDEX(3) = &expectedLength;
+    FIXTURE_INDEX(4) = &expectedBytesCount;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvLengthFieldForceBadEncodedDataObject) {
+    free(fixture);
+}
+
 DECLARE_SETUP_FUNC(btlvPrimitiveDataObject) {
     BTLV_DataObject *dataObject = malloc(sizeof(BTLV_DataObject));
 
