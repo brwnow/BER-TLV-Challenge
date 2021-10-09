@@ -195,6 +195,22 @@ BTLV_ReturnCode
 BTLV_printObject(const BTLV_DataObject *const object);
 
 /**
+ * @brief Standard data object array printing function.
+ *
+ * Prints a given data object array in a default style. Basically calls BTLV_printObject
+ * for each data object in given array.
+ *
+ * @param[in] object Data object array to be printed.
+ * @param[in] arraySize Number of elements of given array.
+ *
+ * @return Returns BTLV_RET_OK on success.
+ * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
+ *
+ */
+BTLV_ReturnCode
+BTLV_printObjectArray(const BTLV_DataObject *const objects, const size_t arraySize);
+
+/**
  * @brief Navigates through a tree of data objects using the depth first approach.
  *
  * For each data object in the tree the print callback is called passing a reference to the data object. The return of

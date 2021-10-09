@@ -168,6 +168,22 @@ BTLV_printObject(const BTLV_DataObject *const object)
     return BTLV_depthFirstNavigateObject(object, BTLV_getDefaultNavigatorPrinter());
 }
 
+BTLV_ReturnCode
+BTLV_printObjectArray(const BTLV_DataObject *const objects, const size_t arraySize)
+{
+    if (objects == NULL || arraySize == 0)
+        return BTLV_INVALID_PARAMETER;
+
+    for (size_t i = 0; i < arraySize; ++i) {
+        BTLV_ReturnCode ret = BTLV_printObject(&(objects[i]));
+
+        if (ret != BTLV_RET_OK)
+            return ret;
+    }
+
+    return BTLV_RET_OK;
+}
+
 static BTLV_ReturnCode
 depthFirstNavigateObjectRecursive(const BTLV_DataObject *const object,
                                   const BTLV_objectPrintCallback printObjectCallback,
