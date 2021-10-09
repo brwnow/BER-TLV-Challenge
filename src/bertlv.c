@@ -75,7 +75,7 @@ decodeTlvObjectRecursive(const uint8_t *const tlvObjectBuffer,
         return BTLV_RET_OK;
     } else {
         return BTLV_decodeTlvObject(&(tlvObjectBuffer[currentByte]),
-                                    objectBufferSize - currentByte,
+                                    decodedObject->length,
                                     &(decodedObject->valueField.children),
                                     &(decodedObject->childObjectsCount));
     }
