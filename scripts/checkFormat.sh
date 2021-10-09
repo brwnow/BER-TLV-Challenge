@@ -1,6 +1,11 @@
 #!/bin/bash
 
+redfont='\033[0;31m'
+greenfont='\033[0;32m'
+nocolor='\033[0m'
+
 badFilesCounter=0
+badFilesList=
 
 exitWithError() {
     echo -e "checkFormat failed to execute\n"
@@ -18,9 +23,26 @@ showFileFormatIssues() {
 
     if [ $? -ne 0 ]; then
         badFilesCounter=$(expr $badFilesCounter + 1)
+        badFilesList="$badFilesList $1"
     fi
 
     rm -f $TEMP_DIFF_FILE
+}
+
+showCheckingResult() {
+    echo -e "----------------------------"
+
+    if [ $badFilesCounter -gt 0 ]; then
+        echo -e "   ${redfont}$badFilesCounter files bad formatted\n"
+
+        for file in $badFilesList; do
+            echo -e $file
+        done
+    else
+        echo -e "      ${greenfont}Everything is OK"
+    fi
+
+    echo -e "${nocolor}----------------------------"
 }
 
 # Checking if clang-format is available
@@ -45,8 +67,4 @@ do
     showFileFormatIssues $file
 done
 
-echo -e "\n"
-echo -e "----------------------------"
-echo -e "   $badFilesCounter files bad formatted"
-echo -e "----------------------------"
-echo -e "\n"
+showCheckingResult
