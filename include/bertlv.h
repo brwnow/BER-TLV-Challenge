@@ -22,6 +22,10 @@ extern "C" {
 #define BTLV_ERRORCODE_STARTING_VALUE -1000
 #define BTLV_WARNINGCODE_STARTING_VALUE 1
 
+// Heuristic for initial array size when amount of element will be discovered
+// during array fill up. The array me be reallocated for more space
+#define BTLV_ARRAY_INITIAL_SIZE_HEURISTIC 4
+
 /**
  * @brief Return codes for BTLV Lib functions
  *
@@ -150,7 +154,8 @@ BTLV_getVersion(void);
 BTLV_ReturnCode
 BTLV_decodeTlvObject(const uint8_t *const tlvObjectBuffer,
                      const size_t objectBufferSize,
-                     BTLV_DataObject **decodedObject);
+                     BTLV_DataObject **tlvDataObjectsArray,
+                     size_t *const tlvDataObjectsCount);
 
 /**
  * @brief Encode a BER-TLV data object from tree of objects to block of bytes.
@@ -242,6 +247,16 @@ BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
  */
 void
 BTLV_destroyTlvObject(BTLV_DataObject *const object);
+
+/**
+ * @brief Try to destroy each object of given array and then finally destroy the array
+ *
+ * @param objectArray Reference to the data objectarray that must be deallocated.
+ * @param elementCount Number of elements in given array
+ *
+ */
+void
+BTLV_destroyTlvObjectArray(BTLV_DataObject *const objectArray, const size_t elementCount);
 
 #ifdef __cplusplus
 }
