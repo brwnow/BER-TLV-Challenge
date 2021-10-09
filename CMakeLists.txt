@@ -23,6 +23,8 @@ set(BTLV_SOURCES_PATH
 
 add_library(btlv SHARED
     ${BTLV_SOURCES_PATH}/bertlv.c
+    ${BTLV_SOURCES_PATH}/tlvparser.c
+    ${BTLV_SOURCES_PATH}/architecture/typehandler.c
 )
 
 set_target_properties(btlv PROPERTIES VERSION ${PROJECT_VERSION})
