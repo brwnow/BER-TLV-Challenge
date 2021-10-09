@@ -41,6 +41,7 @@ typedef enum {
     BTLV_MEMORY_NOT_ENOUGH, /**< Function failed due to lack of free memory. It does happen for those functions that
                                need to allocate heap memory. */
     BTLV_SMALL_BUFFER,      /**< Output buffer was not enough to encode the whole data object. */
+    BTLV_TYPE_OVERFLOW,     /**< An overflow of an integer type has occurred during TLV parsing. */
     BTLV_BAD_TLV_ENCODING,  /**< Given encoded TLV byte block is encoded incorrectly. */
     BTLV_BAD_TLV_STRUCTURE, /**< Given BTLV_DataObject has an invalid structure for a TLV Data Object. */
     BTLV_OUTPUT_STREAM_MISSING, /**< No output stream available during printing function execution. */
@@ -140,6 +141,7 @@ BTLV_getVersion(void);
  * @return Returns BTLV_MEMORY_NOT_ENOUGH if it fails allocating memory during decoding of TLV object byte block.
  * @return Returns BTLV_BAD_TLV_ENCODING if input TLV object byte block is bad encoded and the function
  * fails to decode it.
+ * @return Returns BTLV_TYPE_OVERFLOW if an integer type overflow occur during the parsing of given TLV data object.
  *
  */
 BTLV_ReturnCode
