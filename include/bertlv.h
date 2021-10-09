@@ -87,8 +87,9 @@ typedef enum {
 typedef enum {
     BTLV_DEPTH_NAVIGATION_STEP_INTO, /**< Go further on nesting level when navigating through a data objects tree */
     BTLV_DEPTH_NAVIGATION_STEP_OVER, /**< Ignores nesting of current data object if its of type constructed */
-    BTLV_DEPTH_NAVIGATION_STEP_OUT   /**< Ignores current data object nesting and subsequent data objects at current
-                                        nesting level */
+    BTLV_DEPTH_NAVIGATION_STEP_OUT,  /**< Ignores current data object nesting and subsequent data objects at current
+                                          nesting level */
+    BTLV_DEPTH_NAVIGATION_HALT       /**< Interrupts the whole naviation at the point that halt was returned */
 } BTLV_ObjectPrintCallbackRetVal;
 
 /**

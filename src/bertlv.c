@@ -166,13 +166,71 @@ BTLV_printObject(const BTLV_DataObject *const object)
     return BTLV_GENERIC_ERROR;
 }
 
+static BTLV_ReturnCode
+depthFirstNavigateObjectRecursive(const BTLV_DataObject *const object,
+                                  const BTLV_objectPrintCallback printObjectCallback,
+                                  const uint8_t nestingLevel,
+                                  BTLV_ObjectPrintCallbackRetVal *controlRaising)
+{
+    if(object == NULL || printObjectCallback == NULL)
+        return BTLV_INVALID_PARAMETER;
+
+    BTLV_ObjectPrintCallbackRetVal control = printObjectCallback(object, nestingLevel);
+
+    switch(control) {
+        case BTLV_DEPTH_NAVIGATION_STEP_INTO:
+            if (object->type == BTLV_CONSTRUCTED) {
+                for (size_t i = 0; i < object->childObjectsCount; ++i) {
+                    BTLV_ReturnCode ret = depthFirstNavigateObjectRecursive(
+                        &(object->valueField.children[i]),
+                        printObjectCallback,
+                        nestingLevel + 1,
+                        &control);
+
+                    if (ret != BTLV_RET_OK)
+                        return ret;
+
+                    if (control == BTLV_DEPTH_NAVIGATION_STEP_OUT) {
+                        *controlRaising = BTLV_DEPTH_NAVIGATION_STEP_INTO;
+                        return BTLV_RET_OK;
+                    }
+
+                    if (control == BTLV_DEPTH_NAVIGATION_HALT) {
+                        *controlRaising = BTLV_DEPTH_NAVIGATION_HALT;
+                        return BTLV_RET_OK;
+                    }
+                }
+            }
+            return BTLV_RET_OK;
+
+        case BTLV_DEPTH_NAVIGATION_STEP_OVER:
+            // Don't go further nesting on current object but return control to previous
+            // level to keep going
+            *controlRaising = BTLV_DEPTH_NAVIGATION_STEP_INTO;
+            return BTLV_RET_OK;
+
+        case BTLV_DEPTH_NAVIGATION_STEP_OUT:
+        case BTLV_DEPTH_NAVIGATION_HALT:
+            // Return command to previous level so they know what to do
+            // totally halt or go one level backward
+            *controlRaising = control;
+            return BTLV_RET_OK;
+
+        default:
+            // Invalid control command received.
+            return BTLV_BAD_CALLBACK_COMMAND;
+    }
+}
+
 BTLV_ReturnCode
 BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object, const BTLV_objectPrintCallback printObjectCallback)
 {
-    (void)object;
-    (void)printObjectCallback;
+    if(object == NULL || printObjectCallback == NULL)
+        return BTLV_INVALID_PARAMETER;
 
-    return BTLV_GENERIC_ERROR;
+    BTLV_ObjectPrintCallbackRetVal control;
+
+    return depthFirstNavigateObjectRecursive(object, printObjectCallback, 0u, &control);
 }
 
 BTLV_ReturnCode
