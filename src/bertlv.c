@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "btlvConfig.h"
+#include "io/printinghelper.h"
 #include "tlvparser.h"
 
 const char *
@@ -161,9 +162,10 @@ BTLV_encodeTlvObject(const BTLV_DataObject *const object, uint8_t *const tlvObje
 BTLV_ReturnCode
 BTLV_printObject(const BTLV_DataObject *const object)
 {
-    (void)object;
+    if (object == NULL)
+        return BTLV_INVALID_PARAMETER;
 
-    return BTLV_GENERIC_ERROR;
+    return BTLV_depthFirstNavigateObject(object, BTLV_getDefaultNavigatorPrinter());
 }
 
 static BTLV_ReturnCode

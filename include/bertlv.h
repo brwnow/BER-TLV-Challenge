@@ -189,9 +189,6 @@ BTLV_encodeTlvObject(const BTLV_DataObject *const object,
  *
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
- * @return Returns BTLV_OUTPUT_STREAM_MISSING if there is no output stream available.
- * @return Returns BTLV_PRINTING_BYTES_LOST if it was possible to print part of data object, but some parts were lost
- * during printing.
  *
  */
 BTLV_ReturnCode
