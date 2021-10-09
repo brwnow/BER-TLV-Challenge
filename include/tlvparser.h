@@ -68,9 +68,9 @@ BTLV_tagFieldParse(const uint8_t *const tlvObjectBuffer,
  * @param[in] tlvObjectBuffer The address of the BER-TLV data object block of bytes in memory.
  * @param[in] objectBufferSize Size of the data object block of bytes.
  * @param[out] length Output parameter to return the extracted length of the BER-TLV element. When its
- * detected that there is subsequent bytes, this parameter is cleaned to 0. If it fails right after
- * cleaning it up, it will return 0. This output may be overflowed, in this case the function will
- * return the code for type overflow.
+ * detected that there is subsequent bytes, this parameter is cleaned to 0. If it fails parsing the
+ * length field, it will return 0. This parameter may be returned truncated if the BER-TLV data object
+ * has more bytes in length field that a size_t can hold.
  * @param[out] lengthFieldByteCount The amount of bytes of parsed length field, including the first
  * byte that indicates the length of length field in cases the first byte has the most significant
  * bit set on. Byte counting don't stop when an overflow occurs. It only stops if buffer limit is
@@ -79,11 +79,11 @@ BTLV_tagFieldParse(const uint8_t *const tlvObjectBuffer,
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
  * @return Returns BTLV_BAD_TLV_ENCODING if input TLV object byte block is bad encoded and the function
- * fails to extract TAG field properties. If it fails for buffer limitation, it returns the amount of data
- * it was capable of parsing, also byte count returns the amount of byte it was possible to parse until
- * buffer limit.
+ * fails to extract LENGTH field properties. Generally it occurs when buffer size is not enough to parse
+ * the data that is supposed to be encoded (length field tells it has more subsequent bytes than buffer size
+ * indicates). When this occurs, returned data must be discard and the parsing must fail.
  * @return Returns BTLV_TYPE_OVERFLOW if an overflow occur during extraction of length field. The length is return
- * anyway, but truncated. The byte count ignores overflow and return the encoded byte count.
+ * anyway, but truncated. The byte count ignores overflow and return the amount of byte encoded.
  *
  */
 BTLV_ReturnCode

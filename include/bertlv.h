@@ -126,15 +126,18 @@ const char *
 BTLV_getVersion(void);
 
 /**
- * @brief Decode a BER-TLV data object to a tree of TLV data objects.
+ * @brief Decode a BER-TLV data object to an array of Data Objects Trees
  *
- * Receives a BER-TLV data object encoded as block of bytes and decode it to a tree of
- * BTLV_DataObject representing all the information encoded passed.
+ * Receives a BER-TLV data object encoded as block of bytes and decode it to several trees of
+ * BTLV_DataObject representing all the information encoded passed. The output parameter tlvDataObjectsArray
+ * is an array of tree roots.
  *
  * @param[in] tlvObjectBuffer The address of the BER-TLV data object block of bytes in memory.
  * @param[in] objectBufferSize Size of the data object block of bytes.
- * @param[out] decodedObject Output parameter where to return the address of decoded data object.
- * In case of failing to decode the object, outputs NULL.
+ * @param[out] decodedObject Output parameter where to return the address of decoded data object. Its an array
+ * of BTLV_DataObject, each data object representing a tree. In case of failing to decode the object, outputs NULL.
+ * @param[out] tlvDataObjectsCount Output parameter where to return the amount of elements in the array returned
+ * through parameter decodedObject. In case of failing, returns zero.
  *
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
@@ -232,7 +235,9 @@ BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
 /**
  * @brief Try to recusively free data object properly and safely.
  *
- * @param object Reference to the data object that must be deallocated.
+ * The object itself is not deallocated.
+ *
+ * @param object Reference to the data object that must be destroyed.
  *
  */
 void
