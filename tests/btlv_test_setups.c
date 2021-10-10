@@ -131,7 +131,9 @@ DECLARE_TEARDOWN_FUNC(btlvLengthFieldSingleByteDataObject) {
 }
 
 DECLARE_SETUP_FUNC(btlvLengthFieldTwoBytesDataObject) {
-    static uint8_t lengthByte[] = { 0x81, 0x80};
+    // buffer with filler bytes because real TLV with high length value have a lot of extra bytes
+    static uint8_t lengthByte[] = { 0x81, 0x80, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
     static size_t fieldSize = 2;
     static BTLV_ReturnCode expectedRet = BTLV_RET_OK;
     static size_t expectedLength = 128;
@@ -152,7 +154,10 @@ DECLARE_TEARDOWN_FUNC(btlvLengthFieldTwoBytesDataObject) {
 }
 
 DECLARE_SETUP_FUNC(btlvLengthFieldFillShortIntDataObject) {
-    static uint8_t lengthByte[] = { 0x82, 0xAA, 0x55, 0xDE, 0x6F };
+    // buffer with filler bytes because real TLV with high length value have a lot of extra bytes
+    static uint8_t lengthByte[] = { 0x82, 0xAA, 0x55, 0xDE, 0x6F, 0xFF, 0xFF, 0xFF,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
     static size_t fieldSize = 5;
     static BTLV_ReturnCode expectedRet = BTLV_RET_OK;
     static size_t expectedLength = 43605;
@@ -173,7 +178,11 @@ DECLARE_TEARDOWN_FUNC(btlvLengthFieldFillShortIntDataObject) {
 }
 
 DECLARE_SETUP_FUNC(btlvLengthFieldForceOverflowDataObject) {
-    static uint8_t lengthByte[] = { 0x89, 0xFE, 0x45, 0x32, 0x99, 0x5D, 0xA3, 0xF1, 0x89, 0x44};
+    // buffer with filler bytes because real TLV with high length value have a lot of extra bytes
+    static uint8_t lengthByte[] = { 0x89, 0xFE, 0x45, 0x32, 0x99, 0x5D, 0xA3, 0xF1, 0x89, 0x44,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
     static size_t fieldSize = sizeof(lengthByte) / sizeof(uint8_t);
     static BTLV_ReturnCode expectedRet = BTLV_TYPE_OVERFLOW;
     static size_t expectedBytesCount = 10;
