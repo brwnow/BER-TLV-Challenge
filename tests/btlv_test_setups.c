@@ -751,3 +751,60 @@ DECLARE_SETUP_FUNC(btlvBadEncodedConstructedDataObject) {
 DECLARE_TEARDOWN_FUNC(btlvBadEncodedConstructedDataObject) {
     free(fixture);
 }
+
+DECLARE_SETUP_FUNC(btlvPrintingMockedOutputStream) {
+    static uint8_t tlvComplexObject[] = {   0x6F, 0x1A, 0x84, 0x0E, 0x31, 0x50, 0x41, 0x59, 0x2E,
+                                            0x53, 0x59, 0x53, 0x2E, 0x44, 0x44, 0x46, 0x30, 0x31,
+                                            0xA5, 0x08, 0x88, 0x01, 0x02, 0x5F, 0x2D, 0x02, 0x65,
+                                            0x6E, 0xE1, 0x0B, 0xC1, 0x03, 0x01, 0x02, 0x03,
+                                            0xC2, 0x00, 0xC3, 0x02, 0xAA, 0xBB };
+    size_t byteBlockSize = sizeof(tlvComplexObject);
+
+    static BTLV_DataObject *complexObject;
+    static size_t objectsParsed;
+
+    BTLV_decodeTlvObject(tlvComplexObject, byteBlockSize, &complexObject, &objectsParsed);
+
+    static char *expectedResult =   "TAG - 0x6F (application class, constructed)\n"
+                                    "LEN - 26 bytes\n\n"
+
+                                    "    TAG - 0x84 (context-specific class, primitive)\n"
+                                    "    LEN - 14 bytes\n"
+                                    "    VAL - 0x31 0x50 0x41 0x59 0x2E 0x53 0x59 0x53 0x2E 0x44 0x44 0x46 0x30 0x31\n\n"
+
+                                    "    TAG - 0xA5 (context-specific class, constructed)\n"
+                                    "    LEN - 8 bytes\n\n"
+
+                                    "        TAG - 0x88 (context-specific class, primitive)\n"
+                                    "        LEN - 1 byte\n"
+                                    "        VAL - 0x02\n\n"
+
+                                    "        TAG - 0x5F 0x2D (application class, primitive)\n"
+                                    "        LEN - 2 bytes\n"
+                                    "        VAL - 0x65 0x6E\n\n"
+
+                                    "TAG - 0xE1 (private class, constructed)\n"
+                                    "LEN - 11 bytes\n\n"
+
+                                    "    TAG - 0xC1 (private class, primitive)\n"
+                                    "    LEN - 3 bytes\n"
+                                    "    VAL - 0x01 0x02 0x03\n\n"
+
+                                    "    TAG - 0xC2 (private class, primitive)\n"
+                                    "    LEN - 0 bytes\n\n"
+
+                                    "    TAG - 0xC3 (private class, primitive)\n"
+                                    "    LEN - 2 bytes\n"
+                                    "    VAL - 0xAA 0xBB\n\n";
+
+    FIXTURE_CREATE(3);
+    FIXTURE_INDEX(0) = complexObject;
+    FIXTURE_INDEX(1) = &objectsParsed;
+    FIXTURE_INDEX(2) = expectedResult;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvPrintingMockedOutputStream) {
+    BTLV_destroyTlvObjectArray(FIXTURE_INDEX(0), *(size_t *)FIXTURE_INDEX(1));
+}

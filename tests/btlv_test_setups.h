@@ -200,4 +200,14 @@ DECLARE_TEARDOWN_FUNC(btlvBadEncodedPrimitiveDataObject);
 DECLARE_SETUP_FUNC(btlvBadEncodedConstructedDataObject);
 DECLARE_TEARDOWN_FUNC(btlvBadEncodedConstructedDataObject);
 
+// =======================
+/* Setup for printing tests, with expected result string and data object
+ * constructed to be printed.
+ *
+ * fixture format: expected result string and data object ready to be
+ * printed.
+ */
+DECLARE_SETUP_FUNC(btlvPrintingMockedOutputStream);
+DECLARE_TEARDOWN_FUNC(btlvPrintingMockedOutputStream);
+
 #endif // BTLV_LIB_TESTS_SETUPS_H
