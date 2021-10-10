@@ -125,4 +125,22 @@ if(${BUILD_EXAMPLES})
     install(TARGETS customPrintFunction
         RUNTIME DESTINATION ${EXAMPLES_INSTALL_PATH}
     )
+
+    # Statistics Navigator
+    add_executable(statisticsNavigator
+        ${EXAMPLES_SOURCES_PATH}/StatisticsNavigator/main.c
+    )
+
+    target_link_libraries(statisticsNavigator btlv)
+    target_include_directories(statisticsNavigator PRIVATE "${BTLV_HEADERS_PATH}")
+
+    if(MSVC)
+        target_compile_options(statisticsNavigator PRIVATE /W4 /WX)
+    else()
+        target_compile_options(statisticsNavigator PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
+
+    install(TARGETS statisticsNavigator
+        RUNTIME DESTINATION ${EXAMPLES_INSTALL_PATH}
+    )
 endif()
