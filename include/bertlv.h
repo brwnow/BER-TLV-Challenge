@@ -22,6 +22,10 @@ extern "C" {
 #define BTLV_ERRORCODE_STARTING_VALUE -1000
 #define BTLV_WARNINGCODE_STARTING_VALUE 1
 
+// Heuristic for initial array size when amount of element will be discovered
+// during array fill up. The array me be reallocated for more space
+#define BTLV_ARRAY_INITIAL_SIZE_HEURISTIC 4
+
 /**
  * @brief Return codes for BTLV Lib functions
  *
@@ -41,6 +45,7 @@ typedef enum {
     BTLV_MEMORY_NOT_ENOUGH, /**< Function failed due to lack of free memory. It does happen for those functions that
                                need to allocate heap memory. */
     BTLV_SMALL_BUFFER,      /**< Output buffer was not enough to encode the whole data object. */
+    BTLV_TYPE_OVERFLOW,     /**< An overflow of an integer type has occurred during TLV parsing. */
     BTLV_BAD_TLV_ENCODING,  /**< Given encoded TLV byte block is encoded incorrectly. */
     BTLV_BAD_TLV_STRUCTURE, /**< Given BTLV_DataObject has an invalid structure for a TLV Data Object. */
     BTLV_OUTPUT_STREAM_MISSING, /**< No output stream available during printing function execution. */
@@ -82,8 +87,9 @@ typedef enum {
 typedef enum {
     BTLV_DEPTH_NAVIGATION_STEP_INTO, /**< Go further on nesting level when navigating through a data objects tree */
     BTLV_DEPTH_NAVIGATION_STEP_OVER, /**< Ignores nesting of current data object if its of type constructed */
-    BTLV_DEPTH_NAVIGATION_STEP_OUT   /**< Ignores current data object nesting and subsequent data objects at current
-                                        nesting level */
+    BTLV_DEPTH_NAVIGATION_STEP_OUT,  /**< Ignores current data object nesting and subsequent data objects at current
+                                          nesting level */
+    BTLV_DEPTH_NAVIGATION_HALT       /**< Interrupts the whole naviation at the point that halt was returned */
 } BTLV_ObjectPrintCallbackRetVal;
 
 /**
@@ -125,27 +131,32 @@ const char *
 BTLV_getVersion(void);
 
 /**
- * @brief Decode a BER-TLV data object to a tree of TLV data objects.
+ * @brief Decode a BER-TLV data object to an array of Data Objects Trees
  *
- * Receives a BER-TLV data object encoded as block of bytes and decode it to a tree of
- * BTLV_DataObject representing all the information encoded passed.
+ * Receives a BER-TLV data object encoded as block of bytes and decode it to several trees of
+ * BTLV_DataObject representing all the information encoded passed. The output parameter tlvDataObjectsArray
+ * is an array of tree roots.
  *
  * @param[in] tlvObjectBuffer The address of the BER-TLV data object block of bytes in memory.
  * @param[in] objectBufferSize Size of the data object block of bytes.
- * @param[out] decodedObject Output parameter where to return the address of decoded data object.
- * In case of failing to decode the object, outputs NULL.
+ * @param[out] decodedObject Output parameter where to return the address of decoded data object. Its an array
+ * of BTLV_DataObject, each data object representing a tree. In case of failing to decode the object, outputs NULL.
+ * @param[out] tlvDataObjectsCount Output parameter where to return the amount of elements in the array returned
+ * through parameter decodedObject. In case of failing, returns zero.
  *
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
  * @return Returns BTLV_MEMORY_NOT_ENOUGH if it fails allocating memory during decoding of TLV object byte block.
  * @return Returns BTLV_BAD_TLV_ENCODING if input TLV object byte block is bad encoded and the function
  * fails to decode it.
+ * @return Returns BTLV_TYPE_OVERFLOW if an integer type overflow occur during the parsing of given TLV data object.
  *
  */
 BTLV_ReturnCode
 BTLV_decodeTlvObject(const uint8_t *const tlvObjectBuffer,
                      const size_t objectBufferSize,
-                     BTLV_DataObject **decodedObject);
+                     BTLV_DataObject **tlvDataObjectsArray,
+                     size_t *const tlvDataObjectsCount);
 
 /**
  * @brief Encode a BER-TLV data object from tree of objects to block of bytes.
@@ -178,13 +189,26 @@ BTLV_encodeTlvObject(const BTLV_DataObject *const object,
  *
  * @return Returns BTLV_RET_OK on success.
  * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
- * @return Returns BTLV_OUTPUT_STREAM_MISSING if there is no output stream available.
- * @return Returns BTLV_PRINTING_BYTES_LOST if it was possible to print part of data object, but some parts were lost
- * during printing.
  *
  */
 BTLV_ReturnCode
 BTLV_printObject(const BTLV_DataObject *const object);
+
+/**
+ * @brief Standard data object array printing function.
+ *
+ * Prints a given data object array in a default style. Basically calls BTLV_printObject
+ * for each data object in given array.
+ *
+ * @param[in] object Data object array to be printed.
+ * @param[in] arraySize Number of elements of given array.
+ *
+ * @return Returns BTLV_RET_OK on success.
+ * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
+ *
+ */
+BTLV_ReturnCode
+BTLV_printObjectArray(const BTLV_DataObject *const objects, const size_t arraySize);
 
 /**
  * @brief Navigates through a tree of data objects using the depth first approach.
@@ -230,11 +254,23 @@ BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
 /**
  * @brief Try to recusively free data object properly and safely.
  *
- * @param object Reference to the data object that must be deallocated.
+ * The object itself is not deallocated.
+ *
+ * @param object Reference to the data object that must be destroyed.
  *
  */
 void
 BTLV_destroyTlvObject(BTLV_DataObject *const object);
+
+/**
+ * @brief Try to destroy each object of given array and then finally destroy the array
+ *
+ * @param objectArray Reference to the data objectarray that must be deallocated.
+ * @param elementCount Number of elements in given array
+ *
+ */
+void
+BTLV_destroyTlvObjectArray(BTLV_DataObject *const objectArray, const size_t elementCount);
 
 #ifdef __cplusplus
 }

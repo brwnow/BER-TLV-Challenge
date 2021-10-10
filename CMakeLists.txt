@@ -21,8 +21,13 @@ set(BTLV_SOURCES_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+set(BTLV_INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/libbtlv)
+
 add_library(btlv SHARED
     ${BTLV_SOURCES_PATH}/bertlv.c
+    ${BTLV_SOURCES_PATH}/tlvparser.c
+    ${BTLV_SOURCES_PATH}/architecture/typehandler.c
+    ${BTLV_SOURCES_PATH}/io/printinghelper.c
 )
 
 set_target_properties(btlv PROPERTIES VERSION ${PROJECT_VERSION})
@@ -38,8 +43,8 @@ endif()
 target_include_directories(btlv PRIVATE "${PROJECT_BINARY_DIR}" "${BTLV_HEADERS_PATH}")
 
 install(TARGETS btlv
-    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/libbtlv
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_PREFIX}/libbtlv/include
+    LIBRARY DESTINATION ${BTLV_INSTALL_PATH}
+    PUBLIC_HEADER DESTINATION ${BTLV_INSTALL_PATH}/include
 )
 
 if(${BUILD_UNIT_TESTS})
@@ -51,8 +56,7 @@ if(${BUILD_UNIT_TESTS})
     set(UNIT_TESTS_SOURCES_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     set(MUNIT_FRAMEWORK_SOURCES_PATH ${CMAKE_CURRENT_SOURCE_DIR}/munit)
 
-    SET(UNIT_TESTS_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/tests")
-    SET(CMAKE_INSTALL_RPATH "${UNIT_TESTS_INSTALL_PATH}")
+    SET(CMAKE_INSTALL_RPATH ${BTLV_INSTALL_PATH})
 
     add_executable(unitTests
         ${MUNIT_FRAMEWORK_SOURCES_PATH}/munit.c
@@ -76,7 +80,7 @@ if(${BUILD_UNIT_TESTS})
     endif()
 
     install(TARGETS unitTests
-        RUNTIME DESTINATION ${UNIT_TESTS_INSTALL_PATH}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/tests
     )
 
     install(TARGETS btlv
