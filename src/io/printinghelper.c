@@ -97,7 +97,7 @@ defaultNavigatorPrinter(const BTLV_DataObject *const object, const uint8_t nesti
     printf("LEN - %zu %s\n", object->length, (object->length == 1 ? "byte" : "bytes"));
     printfLineSpacing(defaultLineSpacing);
 
-    if (object->type == BTLV_PRIMITIVE) {
+    if (object->type == BTLV_PRIMITIVE && object->length > 0) {
         printWhiteSpaces(tab);
         printPrimitiveVal(object->valueField.value, object->length);
     }
