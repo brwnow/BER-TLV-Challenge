@@ -33,7 +33,10 @@ DECLARE_TEST_FUNC(printgComplexTlvDataObject)
         return MUNIT_ERROR;
     }
 
-    fread(result, 1, outputLength, tempStdout);
+    size_t freadRet = fread(result, 1, outputLength, tempStdout);
+
+    // silecing warning
+    (void)freadRet;
 
     fclose(tempStdout);
     remove(tempStdoutFilename); // not so portable, but working only for linux for while

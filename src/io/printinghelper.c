@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 // 32 white spaces buffered for speed up printing routines
-static char spacesArray[] = "                                ";
+static char spacesArray[33] = "                                ";
 
 // 8 line spacing buffered for speed up printing
 static char lineSpacingArray[] = "\n\n\n\n\n\n\n\n";
@@ -25,7 +25,7 @@ printWhiteSpaces(uint8_t amount)
         return;
 
     if (amount > maxAmount)
-        amount = maxAmount;
+        amount = maxAmount - 1;
 
     spacesArray[amount] = '\0';
     printf("%s", spacesArray);
@@ -41,7 +41,7 @@ printfLineSpacing(uint8_t amount)
         return;
 
     if (amount > maxAmount)
-        amount = maxAmount;
+        amount = maxAmount - 1;
 
     lineSpacingArray[amount] = '\0';
     printf("%s", lineSpacingArray);

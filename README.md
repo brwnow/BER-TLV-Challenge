@@ -7,13 +7,15 @@ A library handful for parsing and printing BER-TLV objects.
 2. [Environment Setup](#environment-setup)
 3. [Building](#building)
     - [Info](#info)
+    - [Type](#type)
     - [Options](#options)
     - [Native Linux building](#native-linux-building)
     - [Installing](#installing)
-4. [Version Bumping](#version-bumping)
-5. [API Documentation](#api-documentation)
-6. [Formating source code properly](#formating-source-code-properly)
-7. [Testing](#testing)
+4. [API Documentation](#api-documentation)
+5. [Formating source code properly](#formating-source-code-properly)
+6. [Testing](#testing)
+7. [Version Bumping](#version-bumping)
+8. [Contributing](#contributing)
 
 ## First steps after cloning
 
@@ -32,6 +34,10 @@ In order to use all project tools and scripts, you must prepare your environment
 ### Info
 
 BTLV Lib build is based on Cmake meta-maker. This build was tested for cmake 3.16, for this reason this version is set as minimum  required, which doesn't mean it wont work on older Cmake versions. Also it was tested for `Linux (Ubuntu 20.04 and 18.04)` on `x86 architecture`, compiled and linked with `gcc 9.3.0 and 7.5.0`
+
+### Type
+
+To build for `release` or `debug` you must set the Cmake variable `CMAKE_BUILD_TYPE` to `RELEASE` or `DEBUG` through CLI by calling `cmake -DCMAKE_BUILD_TYPE=RELEASE|DEBUG .....` or through cmake-gui setting `RELEASE` or `DEBUG` on `CMAKE_BUILD_TYPE` field.
 
 ### Options
 
