@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 
 project(btlv VERSION 0.0.1 DESCRIPTION "BER-TLV parsing library")
 
-option(BUILD_UNIT_TESTS "Enable/Disable build of unit tests" OFF)
+option(BUILD_UNIT_TESTS "Enable/Disable build of unit tests" ON)
+option(BUILD_EXAMPLES "Enable/Disable build of lib usage examples" ON)
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH "Destination path where to install build products" FORCE)
@@ -82,8 +83,27 @@ if(${BUILD_UNIT_TESTS})
     install(TARGETS unitTests
         RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/tests
     )
+endif()
 
-    install(TARGETS btlv
-        LIBRARY DESTINATION ${UNIT_TESTS_INSTALL_PATH}
+if(${BUILD_EXAMPLES})
+    set(EXAMPLES_SOURCES_PATH ${CMAKE_CURRENT_SOURCE_DIR}/examples)
+
+    set(EXAMPLES_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/examples")
+
+    add_executable(defaultPrintFunction
+        ${EXAMPLES_SOURCES_PATH}/DefaultPrintFunction/main.c
+    )
+
+    target_link_libraries(defaultPrintFunction btlv)
+    target_include_directories(defaultPrintFunction PRIVATE "${BTLV_HEADERS_PATH}")
+
+    if(MSVC)
+        target_compile_options(defaultPrintFunction PRIVATE /W4 /WX)
+    else()
+        target_compile_options(defaultPrintFunction PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
+
+    install(TARGETS defaultPrintFunction
+        RUNTIME DESTINATION ${EXAMPLES_INSTALL_PATH}
     )
 endif()
