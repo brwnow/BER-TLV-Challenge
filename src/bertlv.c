@@ -282,7 +282,7 @@ void
 BTLV_destroyTlvObjectArray(BTLV_DataObject *const objectArray, const size_t elementCount)
 {
     if(objectArray != NULL && elementCount > 0) {
-        for(size_t i = 0; i <= elementCount; ++i) {
+        for(size_t i = 0; i < elementCount; ++i) {
             BTLV_destroyTlvObject(&(objectArray[i]));
         }
 
