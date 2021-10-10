@@ -4,6 +4,10 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if __BYTE_ORDER__ != __ORDER_LITTLE_ENDIAN__ && \
     __BYTE_ORDER__ != __ORDER_BIG_ENDIAN__ && \
     __BYTE_ORDER__ != __ORDER_PDP_ENDIAN__
@@ -21,5 +25,9 @@
  */
 size_t
 BTLV_castBigEndianBlockToSizeT(const void *const memblock);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // BTLV_LIB_TYPE_HANDLER_H

@@ -5,6 +5,10 @@
 
 #include "bertlv.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Gets a navigator callback for the default printer implementation of BTLV Lib.
  *
@@ -41,5 +45,8 @@ BTLV_setDefaultNavigatorPrinterLineSpacing(const uint8_t lineSpacing);
 void
 BTLV_setDefaultNavigatorPrinterElementSpacing(const uint8_t elementSpacing);
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif // BTLV_LIB_PRINTING_HELPER_H

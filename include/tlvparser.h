@@ -3,6 +3,10 @@
 
 #include "bertlv.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Bit mask to filter a TAG property
 #define TAG_CLASS_MASK 0xC0
 #define TAG_TYPE_MASK 0x20
@@ -91,5 +95,9 @@ BTLV_lengthFieldParse(const uint8_t *const tlvObjectBuffer,
                       const size_t objectBufferSize,
                       size_t *const length,
                       size_t *const lengthFieldByteCount);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // BTLV_LIB_TLV_PARSER_H
