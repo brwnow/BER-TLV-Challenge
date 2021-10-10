@@ -90,6 +90,7 @@ if(${BUILD_EXAMPLES})
 
     set(EXAMPLES_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/examples")
 
+    # Default Print Function
     add_executable(defaultPrintFunction
         ${EXAMPLES_SOURCES_PATH}/DefaultPrintFunction/main.c
     )
@@ -104,6 +105,24 @@ if(${BUILD_EXAMPLES})
     endif()
 
     install(TARGETS defaultPrintFunction
+        RUNTIME DESTINATION ${EXAMPLES_INSTALL_PATH}
+    )
+
+    # Custom Print Function
+    add_executable(customPrintFunction
+        ${EXAMPLES_SOURCES_PATH}/CustomPrintFunction/main.c
+    )
+
+    target_link_libraries(customPrintFunction btlv)
+    target_include_directories(customPrintFunction PRIVATE "${BTLV_HEADERS_PATH}")
+
+    if(MSVC)
+        target_compile_options(customPrintFunction PRIVATE /W4 /WX)
+    else()
+        target_compile_options(customPrintFunction PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
+
+    install(TARGETS customPrintFunction
         RUNTIME DESTINATION ${EXAMPLES_INSTALL_PATH}
     )
 endif()
