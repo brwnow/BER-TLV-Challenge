@@ -60,7 +60,7 @@ BTLV_lengthFieldParse(const uint8_t *const tlvObjectBuffer,
         uint8_t fieldBytesCount = LENGTH_GET_SUBSEQUENT_BYTES_COUNT(tlvObjectBuffer[0]);
 
         // If there is not enough buffer to parse the length field, it's bad encoded
-        if(fieldBytesCount + 1u > objectBufferSize) {
+        if (fieldBytesCount + 1u > objectBufferSize) {
             *lengthFieldByteCount = objectBufferSize;
 
             return BTLV_BAD_TLV_ENCODING;
@@ -70,7 +70,7 @@ BTLV_lengthFieldParse(const uint8_t *const tlvObjectBuffer,
         *lengthFieldByteCount = fieldBytesCount + 1u;
 
         // Amount of bytes in length field is greater than size_t size ?
-        if(fieldBytesCount > sizeof(size_t)) {
+        if (fieldBytesCount > sizeof(size_t)) {
             // Truncating bytes from length field that doesn't fit a size_t type
             *length = BTLV_castBigEndianBlockToSizeT(tlvObjectBuffer + (*lengthFieldByteCount - sizeof(size_t)));
 

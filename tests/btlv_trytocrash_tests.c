@@ -44,7 +44,8 @@ DECLARE_TEST_FUNC(decodeTlvObject)
     munit_assert_int(BTLV_decodeTlvObject(stubByteArray, 50, NULL, &stubOutputLength), ==, BTLV_INVALID_PARAMETER);
     munit_assert_int(BTLV_decodeTlvObject(NULL, 50, &stubOutputObject, &stubOutputLength), ==, BTLV_INVALID_PARAMETER);
 
-    munit_assert_int(BTLV_decodeTlvObject(stubByteArray, 0, &stubOutputObject, &stubOutputLength), ==, BTLV_BAD_TLV_ENCODING);
+    munit_assert_int(
+        BTLV_decodeTlvObject(stubByteArray, 0, &stubOutputObject, &stubOutputLength), ==, BTLV_BAD_TLV_ENCODING);
 
     return MUNIT_OK;
 }

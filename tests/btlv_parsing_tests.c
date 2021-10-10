@@ -79,7 +79,7 @@ DECLARE_TEST_FUNC(decodeSuccesfullyMultiRoot)
     const uint8_t *const objectBytes = FIXTURE_INDEX(0);
     const size_t objectSize = *(size_t *)(FIXTURE_INDEX(1));
     const BTLV_DataObject *const expectedResult = FIXTURE_INDEX(2);
-    const size_t expectedArrayLength = *(size_t*)(FIXTURE_INDEX(3));
+    const size_t expectedArrayLength = *(size_t *)(FIXTURE_INDEX(3));
 
     BTLV_DataObject *decodedObjects;
     size_t arrayLength = 0;

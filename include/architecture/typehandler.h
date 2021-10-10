@@ -8,10 +8,9 @@
 extern "C" {
 #endif
 
-#if __BYTE_ORDER__ != __ORDER_LITTLE_ENDIAN__ && \
-    __BYTE_ORDER__ != __ORDER_BIG_ENDIAN__ && \
+#if __BYTE_ORDER__ != __ORDER_LITTLE_ENDIAN__ && __BYTE_ORDER__ != __ORDER_BIG_ENDIAN__ &&                             \
     __BYTE_ORDER__ != __ORDER_PDP_ENDIAN__
-#   error "Host platform endianness is not supported"
+#error "Host platform endianness is not supported"
 #endif
 
 /**

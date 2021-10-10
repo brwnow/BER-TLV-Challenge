@@ -8,17 +8,9 @@ static char spacesArray[] = "                                ";
 // 8 line spacing buffered for speed up printing
 static char lineSpacingArray[] = "\n\n\n\n\n\n\n\n";
 
-static char *classNames[] = {
-    "universal",
-    "application",
-    "context-specific",
-    "private"
-};
+static char *classNames[] = {"universal", "application", "context-specific", "private"};
 
-static char *typeNames[] = {
-    "primitive",
-    "constructed"
-};
+static char *typeNames[] = {"primitive", "constructed"};
 
 static uint8_t defaultTabSize = 4;
 static uint8_t defaultLineSpacing = 0;
@@ -64,11 +56,10 @@ printTag(const BTLV_DataObject *const object)
 
     printf("TAG - ");
     printf("0x%02X ", object->tag[0]);
-    if(object->tagSize > 1)
+    if (object->tagSize > 1)
         printf("0x%02X ", object->tag[1]);
 
     printf("(%s class, %s)\n", classNames[object->class], typeNames[object->type]);
-
 }
 
 static void
@@ -79,7 +70,7 @@ printPrimitiveVal(const uint8_t *const byteArray, const size_t arraySize)
 
     printf("VAL -");
 
-    for(size_t i = 0; i < arraySize; ++i)
+    for (size_t i = 0; i < arraySize; ++i)
         printf(" 0x%02X", byteArray[i]);
 
     printf("\n");
@@ -88,7 +79,7 @@ printPrimitiveVal(const uint8_t *const byteArray, const size_t arraySize)
 static BTLV_ObjectPrintCallbackRetVal
 defaultNavigatorPrinter(const BTLV_DataObject *const object, const uint8_t nestingLevel)
 {
-    const uint8_t tab = nestingLevel * defaultTabSize; 
+    const uint8_t tab = nestingLevel * defaultTabSize;
 
     printWhiteSpaces(tab);
     printTag(object);

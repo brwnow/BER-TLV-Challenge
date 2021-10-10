@@ -27,7 +27,7 @@ DECLARE_TEST_FUNC(printgComplexTlvDataObject)
     fseek(tempStdout, 0, SEEK_SET);
 
     // not enough memory to load printed content from file
-    if(result == NULL) {
+    if (result == NULL) {
         fclose(tempStdout);
         remove(tempStdoutFilename);
         return MUNIT_ERROR;
@@ -45,12 +45,11 @@ DECLARE_TEST_FUNC(printgComplexTlvDataObject)
     return MUNIT_OK;
 }
 
-static MunitTest btlvPrintingTests[] = {
-    GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_printObjectArrayComplexDataObject",
-                                   printgComplexTlvDataObject,
-                                   btlvPrintingMockedOutputStream),
+static MunitTest btlvPrintingTests[] = {GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_printObjectArrayComplexDataObject",
+                                                                       printgComplexTlvDataObject,
+                                                                       btlvPrintingMockedOutputStream),
 
-    TEST_FUNC_ARRAY_END};
+                                        TEST_FUNC_ARRAY_END};
 
 static MunitSuite btlvPrintingTestsSuite = {"/printing", btlvPrintingTests, NULL, 1, MUNIT_SUITE_OPTION_NONE};
 
