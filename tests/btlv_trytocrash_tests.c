@@ -159,6 +159,16 @@ DECLARE_TEST_FUNC(destroyTlvObjectConstructed)
     return MUNIT_OK;
 }
 
+DECLARE_TEST_FUNC(destroyTlvObjectArray)
+{
+    BTLV_DataObject *objectArray = FIXTURE_INDEX(0);
+    size_t arraySize = *(size_t *)(FIXTURE_INDEX(1));
+
+    BTLV_destroyTlvObjectArray(objectArray, arraySize);
+
+    return MUNIT_OK;
+}
+
 static MunitTest btlvTryingToCrashTests[] = {
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_decodeTlvObject", decodeTlvObject),
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_encodeTlvObject", encodeTlvObject),
@@ -174,6 +184,9 @@ static MunitTest btlvTryingToCrashTests[] = {
     GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectConstructed",
                                    destroyTlvObjectConstructed,
                                    btlvPrimitiveDataObject),
+    GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectArray",
+                                   destroyTlvObjectArray,
+                                   btlvConstructedDataObjectArray),
 
     TEST_FUNC_ARRAY_END};
 

@@ -285,6 +285,63 @@ DECLARE_TEARDOWN_FUNC(btlvConstructedDataObject) {
     free(fixture); 
 }
 
+DECLARE_SETUP_FUNC(btlvConstructedDataObjectArray) {
+    static size_t arraySize = 2;
+    BTLV_DataObject *dataObjectArray = malloc(sizeof(BTLV_DataObject) * arraySize);
+
+    BTLV_DataObject *dataObject = &(dataObjectArray[0]);
+    dataObject->class = BTLV_CLASS_PRIVATE;
+    dataObject->type = BTLV_CONSTRUCTED;
+    dataObject->tag[0] = 0xFF;
+    dataObject->tagSize = 1;
+    dataObject->length = 1;
+    dataObject->childObjectsCount = 2;
+    dataObject->valueField.children = malloc(sizeof(BTLV_DataObject) * dataObject->childObjectsCount);
+
+    BTLV_DataObject *child1 = dataObject->valueField.children;
+    BTLV_DataObject *child2 = dataObject->valueField.children + 1;
+
+    child1->class = BTLV_CLASS_PRIVATE;
+    child1->type = BTLV_PRIMITIVE;
+    child1->tag[0] = 0xFA;
+    child1->tagSize = 1;
+    child1->length = 3;
+    child1->childObjectsCount = 0;
+    child1->valueField.value = malloc(sizeof(uint8_t) * 3);
+    child1->valueField.value[0] = 0xAA;
+    child1->valueField.value[1] = 0x12;
+    child1->valueField.value[2] = 0xC3;
+
+    child2->class = BTLV_CLASS_CONTEXT_SPECIFIC;
+    child2->type = BTLV_PRIMITIVE;
+    child2->tag[0] = 0xC7;
+    child2->tagSize = 1;
+    child2->length = 1;
+    child2->childObjectsCount = 0;
+    child2->valueField.value = malloc(sizeof(uint8_t));
+    child2->valueField.value[0] = 0x85;
+
+    BTLV_DataObject *dataObject2 = &(dataObjectArray[1]);
+
+    dataObject2->class = BTLV_CLASS_PRIVATE;
+    dataObject2->type = BTLV_PRIMITIVE;
+    dataObject2->tag[0] = 0xFF;
+    dataObject2->tagSize = 1;
+    dataObject2->length = 1;
+    dataObject2->childObjectsCount = 0;
+    dataObject2->valueField.value = malloc(sizeof(uint8_t));
+    dataObject2->valueField.value[0] = 0x75;
+
+    FIXTURE_CREATE(2);
+    FIXTURE_INDEX(0) = dataObjectArray;
+    FIXTURE_INDEX(1) = &arraySize;
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvConstructedDataObjectArray) {
+    free(fixture);
+}
+
 DECLARE_SETUP_FUNC(btlvSingleByteTagPrimitiveDataObject) {
     static uint8_t appControlTag[] = { 0xD5, 0x00 };
     static size_t byteBlockSize = sizeof(appControlTag);

@@ -118,6 +118,15 @@ DECLARE_SETUP_FUNC(btlvConstructedDataObject);
 DECLARE_TEARDOWN_FUNC(btlvConstructedDataObject);
 
 // =======================
+/* TLV data object array
+ *
+ * fixture format: pointer to a BTLV_DataObject array
+ */
+DECLARE_SETUP_FUNC(btlvConstructedDataObjectArray);
+DECLARE_TEARDOWN_FUNC(btlvConstructedDataObjectArray);
+
+
+// =======================
 /* 1-byte TAG TLV data object of type primitive
  *
  * fixture format: pointer to byte holding primitive TLV object
