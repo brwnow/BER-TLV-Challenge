@@ -45,6 +45,15 @@ showCheckingResult() {
     echo -e "${nocolor}----------------------------"
 }
 
+# $1 folder where to perform the searching
+# $2 file name pattern
+filesSearchDiff() {
+    for header in $(find ${1} -iname "${2}" -type f)
+    do
+        showFileFormatIssues $header
+    done
+}
+
 # Checking if clang-format is available
 clang-format --version 2>&1 1>/dev/null
 
@@ -52,19 +61,16 @@ if [ $? -ne 0 ]; then
     exitWithError "clang-format command is need and was not found."
 fi
 
-for header in $(find include -name "*.h")
-do
-    showFileFormatIssues $header
-done
+# BTLV Lib headers
+filesSearchDiff "include" "*.h"
 
-for source in $(find src -name "*.c")
-do
-    showFileFormatIssues $source
-done
+# BTLV Lib sources
+filesSearchDiff "src" "*.c"
 
-for file in $(find tests -name "*tests.*")
-do
-    showFileFormatIssues $file
-done
+# Some tests headers and sources
+filesSearchDiff "tests" "tests.*"
+
+# Examples headers and sources
+filesSearchDiff "examples" "*.*"
 
 showCheckingResult
