@@ -74,6 +74,29 @@ DECLARE_TEST_FUNC(decodeSuccessfullySingleElement)
     return MUNIT_OK;
 }
 
+DECLARE_TEST_FUNC(decodeSuccesfullyMultiRoot)
+{
+    const uint8_t *const objectBytes = FIXTURE_INDEX(0);
+    const size_t objectSize = *(size_t *)(FIXTURE_INDEX(1));
+    const BTLV_DataObject *const expectedResult = FIXTURE_INDEX(2);
+    const size_t expectedArrayLength = *(size_t*)(FIXTURE_INDEX(3));
+
+    BTLV_DataObject *decodedObjects;
+    size_t arrayLength = 0;
+
+    BTLV_ReturnCode ret = BTLV_decodeTlvObject(objectBytes, objectSize, &decodedObjects, &arrayLength);
+
+    munit_assert_int(ret, ==, BTLV_RET_OK);
+    munit_assert_size(arrayLength, ==, expectedArrayLength);
+
+    for (size_t i = 0; i < arrayLength; ++i)
+        munit_assert_int(compareBtlvDataObjects(&(decodedObjects[i]), &(expectedResult[i])), ==, true);
+
+    BTLV_destroyTlvObjectArray(decodedObjects, arrayLength);
+
+    return MUNIT_OK;
+}
+
 DECLARE_TEST_FUNC(decodeBadEncodedSingleElement)
 {
     const uint8_t *const objectBytes = FIXTURE_INDEX(0);
@@ -147,6 +170,9 @@ static MunitTest btlvParsingTests[] = {
     GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_decodeTlvObjectArrayMultiNested",
                                    decodeSuccessfullySingleElement,
                                    btlvMultiNestingByteBlockConstructedDataObject),
+    GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_decodeTlvObjectArrayMultiRoot",
+                                   decodeSuccesfullyMultiRoot,
+                                   btlvMultiRootByteBlockConstructedDataObject),
     GET_FULL_TEST_FUNC_ARRAY_ENTRY("/BTLV_decodeTlvObjectArrayBadEncodedPrimitive",
                                    decodeBadEncodedSingleElement,
                                    btlvBadEncodedPrimitiveDataObject),

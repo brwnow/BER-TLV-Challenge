@@ -166,6 +166,16 @@ DECLARE_SETUP_FUNC(btlvMultiNestingByteBlockConstructedDataObject);
 DECLARE_TEARDOWN_FUNC(btlvMultiNestingByteBlockConstructedDataObject);
 
 // =======================
+/* byte block TLV data object of type constructed (several nesting levels
+ * and more than one root)
+ *
+ * fixture format: pointer to byte block holding constructed TLV object with
+ * more than one root
+ */
+DECLARE_SETUP_FUNC(btlvMultiRootByteBlockConstructedDataObject);
+DECLARE_TEARDOWN_FUNC(btlvMultiRootByteBlockConstructedDataObject);
+
+// =======================
 /* byte block TLV data object of type primitive (without expected result)
  *
  * fixture format: pointer to byte block holding primitive TLV object

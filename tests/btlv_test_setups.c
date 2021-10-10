@@ -524,6 +524,134 @@ DECLARE_TEARDOWN_FUNC(btlvMultiNestingByteBlockConstructedDataObject) {
     free(fixture);
 }
 
+DECLARE_SETUP_FUNC(btlvMultiRootByteBlockConstructedDataObject) {
+    static uint8_t multiRoot[] = {  0x6F, 0x1A, 0x84, 0x0E, 0x31, 0x50, 0x41, 0x59, 0x2E, 
+                                    0x53, 0x59, 0x53, 0x2E, 0x44, 0x44, 0x46, 0x30, 0x31,
+                                    0xA5, 0x08, 0x88, 0x01, 0x02, 0x5F, 0x2D, 0x02, 0x65,
+                                    0x6E, 0xE1, 0x0B, 0xC1, 0x03, 0x01, 0x02, 0x03, 0xC2,
+                                    0x00, 0xC3, 0x02, 0xAA, 0xBB };
+    static size_t byteBlockSize = sizeof(multiRoot);
+
+    static uint8_t tag_0x88_value[] = { 0x02 };
+    static uint8_t tag_0x5F_0x2D_value[] = { 0x65, 0x6E };
+
+    static BTLV_DataObject tag_0xA5_children[] = {
+        { // SFI
+            .class = BTLV_CLASS_CONTEXT_SPECIFIC,
+            .type = BTLV_PRIMITIVE,
+            .tag = { 0x88 },
+            .tagSize = 1,
+            .length = 1,
+            .childObjectsCount = 0,
+            .valueField.value = tag_0x88_value
+        },
+        { // Lang preference
+            .class = BTLV_CLASS_APPLICATION,
+            .type = BTLV_PRIMITIVE,
+            .tag = { 0x5F, 0x2D },
+            .tagSize = 2,
+            .length = 2,
+            .childObjectsCount = 0,
+            .valueField.value = tag_0x5F_0x2D_value
+        }
+    };
+
+    static uint8_t tag_0x84_value[] = { 0x31, 0x50, 0x41, 0x59, 0x2E, 0x53, 0x59,
+                                        0x53, 0x2E, 0x44, 0x44, 0x46, 0x30, 0x31 };
+
+    static BTLV_DataObject tag_0x6F_children[] = {
+        { // Dedicated File (DF) Name
+            .class = BTLV_CLASS_CONTEXT_SPECIFIC,
+            .type = BTLV_PRIMITIVE,
+            .tag = { 0x84},
+            .tagSize = 1,
+            .length = 14,
+            .childObjectsCount = 0,
+            .valueField.value = tag_0x84_value
+        },
+        { // FCI Proprietary
+            .class = BTLV_CLASS_CONTEXT_SPECIFIC,
+            .type = BTLV_CONSTRUCTED,
+            .tag = { 0xA5 },
+            .tagSize = 1,
+            .length = 8,
+            .childObjectsCount = 2,
+            .valueField.children = tag_0xA5_children
+        }
+    };
+
+    static BTLV_DataObject expectedResult1 = { // FCI
+        .class = BTLV_CLASS_APPLICATION,
+        .type = BTLV_CONSTRUCTED,
+        .tag = { 0x6F },
+        .tagSize = 1,
+        .length = 26,
+        .childObjectsCount = 2,
+        .valueField.children = tag_0x6F_children
+    };
+
+    static uint8_t child1_value[] = { 0x01, 0x02, 0x03 };
+    static uint8_t child3_value[] = { 0xAA, 0xBB };
+
+    static BTLV_DataObject children[] = {
+        { // child 1
+            .class = BTLV_CLASS_PRIVATE,
+            .type = BTLV_PRIMITIVE,
+            .tag = { 0xC1 },
+            .tagSize = 1,
+            .length = 3,
+            .childObjectsCount = 0,
+            .valueField.value = child1_value
+        },
+        { // child 2
+            .class = BTLV_CLASS_PRIVATE,
+            .type = BTLV_PRIMITIVE,
+            .tag = { 0xC2 },
+            .tagSize = 1,
+            .length = 0,
+            .childObjectsCount = 0,
+            .valueField.value = NULL
+        },
+        { // child 3
+            .class = BTLV_CLASS_PRIVATE,
+            .type = BTLV_PRIMITIVE,
+            .tag = { 0xC3 },
+            .tagSize = 1,
+            .length = 2,
+            .childObjectsCount = 0,
+            .valueField.value = child3_value
+        }
+    };
+
+    static BTLV_DataObject expectedResult2 = {
+        .class = BTLV_CLASS_PRIVATE,
+        .type = BTLV_CONSTRUCTED,
+        .tag = { 0xE1 },
+        .tagSize = 1,
+        .length = 11,
+        .childObjectsCount = 3,
+        .valueField.children = children
+    };
+
+    static BTLV_DataObject expectedResult[2];
+    expectedResult[0] = expectedResult1;
+    expectedResult[1] = expectedResult2;
+
+    static size_t expectedArrayLength = 2;
+
+    FIXTURE_CREATE(4);
+    FIXTURE_INDEX(0) = multiRoot;
+    FIXTURE_INDEX(1) = &byteBlockSize;
+    FIXTURE_INDEX(2) = expectedResult;
+    FIXTURE_INDEX(3) = &expectedArrayLength;
+
+    FIXTURE_RETURN;
+}
+
+DECLARE_TEARDOWN_FUNC(btlvMultiRootByteBlockConstructedDataObject) {
+    free(fixture);
+}
+
 DECLARE_SETUP_FUNC(btlvBadEncodedPrimitiveDataObject) {
     static uint8_t transacCurrExp[] = { 0x84, 0x0E, 0x31, 0x50, 0x41, 0x59, 0x2E, 0x53,
                                         0x59, 0x53, 0x2E, 0x44, 0x44, 0x46, 0x30, 0x31 };
