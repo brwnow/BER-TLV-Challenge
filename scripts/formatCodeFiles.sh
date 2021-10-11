@@ -24,7 +24,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # BTLV Lib headers
-formatFiles "include" "*.h"
+formatFiles "src/include" "*.h"
 
 # BTLV Lib sources
 formatFiles "src" "*.c"
