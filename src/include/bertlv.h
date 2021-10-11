@@ -159,27 +159,6 @@ BTLV_decodeTlvObject(const uint8_t *const tlvObjectBuffer,
                      size_t *const tlvDataObjectsCount);
 
 /**
- * @brief Encode a BER-TLV data object from tree of objects to block of bytes.
- *
- * Receives a BER-TLV data object as a tree of data objects and encode it to a block of bytes.
- *
- * @param[in] object The tree of data objects to be encoded.
- * @param[out] tlvObjectBuffer The address of the block of memory where to write the bytes of the encoded data object.
- * @param[in] objectBufferSize The size in bytes of the given block of memory to output the encoded data object.
- *
- * @return Returns BTLV_RET_OK on success.
- * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
- * @return Returns BTLV_MEMORY_NOT_ENOUGH if it fails allocating memory during decoding of TLV object byte block.
- * @return Returns BTLV_SMALL_BUFFER if given object buffer is not big enough to encode the whole data object.
- * @return Returns BTLV_BAD_TLV_STRUCTURE if input TLV object tree is bad constructed.
- *
- */
-BTLV_ReturnCode
-BTLV_encodeTlvObject(const BTLV_DataObject *const object,
-                     uint8_t *const tlvObjectBuffer,
-                     const size_t objectBufferSize);
-
-/**
  * @brief Standard data object printing function.
  *
  * Prints a given data object in a default style. If the given object is of constructed type, prints its children and
@@ -228,28 +207,6 @@ BTLV_printObjectArray(const BTLV_DataObject *const objects, const size_t arraySi
  */
 BTLV_ReturnCode
 BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object, const BTLV_objectPrintCallback printObjectCallback);
-
-/**
- * @brief Navigates through data objects encoded in a block of bytes
- *
- * For each data object decoded the print callback is called. The return of the callback guide the behavior of the
- * decoding algorithm.
- *
- * @param[in] tlvObjectBuffer buffer to be decoded data object by data object.
- * @param[in] objectBufferSize size in bytes of given buffer.
- * @param[out] printObjectCallback callback to be called to print each data object of data object tree.
- *
- * @return Returns BTLV_RET_OK on success.
- * @return Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments.
- * @return Returns BTLV_BAD_TLV_ENCODING if input TLV data object byte block is bad encoded and it's impossible to
- * navigate correctly through it.
- * @return Returns BTLV_BAD_CALLBACK_COMMAND if callback function returns a control code that is unexpected.
- *
- */
-BTLV_ReturnCode
-BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
-                                const size_t objectBufferSize,
-                                const BTLV_objectPrintCallback printObjectCallback);
 
 /**
  * @brief Try to recusively free data object properly and safely.

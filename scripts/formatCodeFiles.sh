@@ -30,7 +30,8 @@ formatFiles "include" "*.h"
 formatFiles "src" "*.c"
 
 # Some tests headers and sources
-formatFiles "tests" "tests.*"
+formatFiles "tests" "tests.h"
+formatFiles "tests" "tests.c"
 
 # Examples headers and sources
-formatFiles "examples" "*.*"
+formatFiles "examples" "*.c"

@@ -151,16 +151,6 @@ BTLV_decodeTlvObject(const uint8_t *const tlvObjectBuffer,
 }
 
 BTLV_ReturnCode
-BTLV_encodeTlvObject(const BTLV_DataObject *const object, uint8_t *const tlvObjectBuffer, const size_t objectBufferSize)
-{
-    (void)object;
-    (void)tlvObjectBuffer;
-    (void)objectBufferSize;
-
-    return BTLV_GENERIC_ERROR;
-}
-
-BTLV_ReturnCode
 BTLV_printObject(const BTLV_DataObject *const object)
 {
     if (object == NULL)
@@ -247,18 +237,6 @@ BTLV_depthFirstNavigateObject(const BTLV_DataObject *const object, const BTLV_ob
     BTLV_ObjectPrintCallbackRetVal control;
 
     return depthFirstNavigateObjectRecursive(object, printObjectCallback, 0u, &control);
-}
-
-BTLV_ReturnCode
-BTLV_blockOfBytesNavigateObject(const uint8_t *const tlvObjectBuffer,
-                                const size_t objectBufferSize,
-                                const BTLV_objectPrintCallback printObjectCallback)
-{
-    (void)tlvObjectBuffer;
-    (void)objectBufferSize;
-    (void)printObjectCallback;
-
-    return BTLV_GENERIC_ERROR;
 }
 
 void

@@ -50,21 +50,6 @@ DECLARE_TEST_FUNC(decodeTlvObject)
     return MUNIT_OK;
 }
 
-DECLARE_TEST_FUNC(encodeTlvObject)
-{
-    munit_assert_int(BTLV_encodeTlvObject(NULL, NULL, 0), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_encodeTlvObject(&stubDataObject, NULL, 0), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_encodeTlvObject(NULL, stubByteArray, 0), ==, BTLV_INVALID_PARAMETER);
-
-    munit_assert_int(BTLV_encodeTlvObject(NULL, NULL, 50), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_encodeTlvObject(&stubDataObject, NULL, 50), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_encodeTlvObject(NULL, stubByteArray, 50), ==, BTLV_INVALID_PARAMETER);
-
-    munit_assert_int(BTLV_encodeTlvObject(&stubDataObject, stubByteArray, 0), ==, BTLV_BAD_TLV_ENCODING);
-
-    return MUNIT_OK;
-}
-
 DECLARE_TEST_FUNC(printObject)
 {
     munit_assert_int(BTLV_printObject(NULL), ==, BTLV_INVALID_PARAMETER);
@@ -77,20 +62,6 @@ DECLARE_TEST_FUNC(depthFirstNavigateObject)
     munit_assert_int(BTLV_depthFirstNavigateObject(NULL, NULL), ==, BTLV_INVALID_PARAMETER);
     munit_assert_int(BTLV_depthFirstNavigateObject(&stubDataObject, NULL), ==, BTLV_INVALID_PARAMETER);
     munit_assert_int(BTLV_depthFirstNavigateObject(NULL, stubPrintCallback), ==, BTLV_INVALID_PARAMETER);
-
-    return MUNIT_OK;
-}
-
-DECLARE_TEST_FUNC(blockOfBytesNavigateObject)
-{
-    munit_assert_int(BTLV_blockOfBytesNavigateObject(NULL, 0, NULL), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_blockOfBytesNavigateObject(stubByteArray, 0, NULL), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_blockOfBytesNavigateObject(NULL, 0, stubPrintCallback), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_blockOfBytesNavigateObject(stubByteArray, 0, stubPrintCallback), ==, BTLV_INVALID_PARAMETER);
-
-    munit_assert_int(BTLV_blockOfBytesNavigateObject(NULL, 50, NULL), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_blockOfBytesNavigateObject(stubByteArray, 50, NULL), ==, BTLV_INVALID_PARAMETER);
-    munit_assert_int(BTLV_blockOfBytesNavigateObject(NULL, 50, stubPrintCallback), ==, BTLV_INVALID_PARAMETER);
 
     return MUNIT_OK;
 }
@@ -172,10 +143,8 @@ DECLARE_TEST_FUNC(destroyTlvObjectArray)
 
 static MunitTest btlvTryingToCrashTests[] = {
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_decodeTlvObject", decodeTlvObject),
-    GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_encodeTlvObject", encodeTlvObject),
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_printObject", printObject),
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_depthFirstNavigateObject", depthFirstNavigateObject),
-    GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_blockOfBytesNavigateObject", blockOfBytesNavigateObject),
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_destroyTlvObjectNullptr", destroyTlvObjectNullptr),
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_tagFieldParse", parseTagField),
     GET_STANDALONE_TEST_FUNC_ARRAY_ENTRY("/BTLV_legthFieldParse", parseLengthField),
