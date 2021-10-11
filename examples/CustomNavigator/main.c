@@ -8,12 +8,14 @@ static const uint8_t fciTlvObject[] = {0x6F, 0x27, 0x84, 0x0E, 0x31, 0x50, 0x41,
                                        0x02, 0x5F, 0x2D, 0x02, 0x65, 0x6E, 0xE1, 0x0B, 0xC1, 0x03, 0x01,
                                        0x02, 0x03, 0xC2, 0x00, 0xC3, 0x02, 0xAA, 0xBB};
 
-#include <unistd.h>
 #include <termios.h>
+#include <unistd.h>
 
 // Code from internet. Getting input without echoing it
 // not portable, works only on unix based systems
-char getch() {
+char
+getch()
+{
     char buf = 0;
     struct termios old = {0};
     if (tcgetattr(0, &old) < 0)
@@ -25,11 +27,11 @@ char getch() {
     if (tcsetattr(0, TCSANOW, &old) < 0)
         perror("tcsetattr ICANON");
     if (read(0, &buf, 1) < 0)
-        perror ("read()");
+        perror("read()");
     old.c_lflag |= ICANON;
     old.c_lflag |= ECHO;
     if (tcsetattr(0, TCSADRAIN, &old) < 0)
-        perror ("tcsetattr ~ICANON");
+        perror("tcsetattr ~ICANON");
     return (buf);
 }
 
@@ -45,14 +47,13 @@ getControlCommand(void)
 {
     char ch = getch();
 
-    if(ch == 0x1B) {
+    if (ch == 0x1B) {
         ch = getch();
 
-        if(ch == 0x5B) {
+        if (ch == 0x5B) {
             ch = getch();
 
-            switch (ch)
-            {
+            switch (ch) {
             case 0x41:
                 return BTLV_DEPTH_NAVIGATION_STEP_OUT;
             case 0x42:
