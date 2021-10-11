@@ -1,0 +1,38 @@
+language: c
+compiler: gcc
+
+dist: bionic
+
+addons:
+  apt:
+    sources:
+      - llvm-toolchain-trusty-6.0
+      - key_url: 'http://apt.llvm.org/llvm-snapshot.gpg.key'
+    packages:
+      - clang-format-6.0
+
+install:
+  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+  - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
+  - travis_retry wget --no-check-certificate https://cmake.org/files/v3.21/cmake-3.21.0-linux-x86_64.tar.gz
+  - echo "d558724f742653fbe8d7328ee98fab7c *cmake-3.21.0-linux-x86_64.tar.gz" > cmake_md5.txt
+  - md5sum -c cmake_md5.txt
+  - tar -xvf cmake-3.21.0-linux-x86_64.tar.gz > /dev/null
+  - mv cmake-3.21.0-linux-x86_64 cmake-install
+  - PATH=${DEPS_DIR}/cmake-install:${DEPS_DIR}/cmake-install/bin:$PATH
+  - cd ${TRAVIS_BUILD_DIR}
+
+jobs:
+  include:
+    - stage: Linter
+      script: ./scripts/checkFormat.sh
+
+    - stage: Building
+      script:
+        - mkdir build
+        - cd build
+        - cmake ..
+        - make
+        - make install
+        - cd -
+        - ./install/tests/release/unitTests
