@@ -1,3 +1,13 @@
+/**
+ * @file typehandler.h
+ * @brief Core header for helping on casting byte blocks to C types. Not recommended using this
+ * API directly. Use bertlv.h instead.
+ *
+ * You'd better use only bertlv.h header and its exposed API. This file and its functions are
+ * core functions for BTLV Lib working. Only use this directly if quite needed.
+ *
+ */
+
 #ifndef BTLV_LIB_TYPE_HANDLER_H
 #define BTLV_LIB_TYPE_HANDLER_H
 
