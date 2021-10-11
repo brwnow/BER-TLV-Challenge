@@ -22,9 +22,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BTLV Lib
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">0.0.2</span>
    </div>
-   <div id="projectbrief">LibhandfulforencodingordecodingBER-TLVdataobjects</div>
+   <div id="projectbrief">Lib handful for encoding or decoding BER-TLV data objects</div>
   </td>
  </tr>
  </tbody>
@@ -99,6 +99,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ac27d66ba2f14c87d84eea1420558ed35"><td class="memItemLeft" align="right" valign="top"><a id="ac27d66ba2f14c87d84eea1420558ed35"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>BTLV_WARNINGCODE_STARTING_VALUE</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:ac27d66ba2f14c87d84eea1420558ed35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06163fe7bd466315e84d59584b9556d5"><td class="memItemLeft" align="right" valign="top"><a id="a06163fe7bd466315e84d59584b9556d5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BTLV_ARRAY_INITIAL_SIZE_HEURISTIC</b>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a06163fe7bd466315e84d59584b9556d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -118,11 +121,12 @@ Enumerations</h2></td></tr>
 <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6bad480f2e0bacf767721df6eee4601c4aa">BTLV_MEMORY_NOT_ENOUGH</a>, 
 <br />
 &#160;&#160;<a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baa325a1a168cc541f9cd791415833f9f2">BTLV_SMALL_BUFFER</a>, 
+<a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba54ec351cda8ca788e80a1874edee0b48">BTLV_TYPE_OVERFLOW</a>, 
 <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba5f9dc6156f877615bb174a50f2bd42cc">BTLV_BAD_TLV_ENCODING</a>, 
 <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baff15d521197dd040e85484d76978d85d">BTLV_BAD_TLV_STRUCTURE</a>, 
-<a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baa38b40c210cb0ab0e8d2dfccba905909">BTLV_OUTPUT_STREAM_MISSING</a>, 
 <br />
-&#160;&#160;<a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba5dd6d88029f3121d34b01c86a9a9494c">BTLV_BAD_CALLBACK_COMMAND</a>, 
+&#160;&#160;<a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baa38b40c210cb0ab0e8d2dfccba905909">BTLV_OUTPUT_STREAM_MISSING</a>, 
+<a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba5dd6d88029f3121d34b01c86a9a9494c">BTLV_BAD_CALLBACK_COMMAND</a>, 
 <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba7bdea06a4d458952c1e3b79c4de69521">BTLV_PRINTING_BYTES_LOST</a> = BTLV_WARNINGCODE_STARTING_VALUE
 <br />
  }<tr class="memdesc:a0f22ff95c3eff0ff70b6e40823240e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return codes for BTLV Lib functions.  <a href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">More...</a><br /></td></tr>
@@ -142,7 +146,8 @@ Enumerations</h2></td></tr>
 <tr class="separator:a93b58b13d1f4ecdaf10fb1c6615f0de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ef711a2aa9db498c9ef064a640b9c5a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5a">BTLV_ObjectPrintCallbackRetVal</a> { <a class="el" href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aaa8e05cec58bb69a909bc72faf6b0b021">BTLV_DEPTH_NAVIGATION_STEP_INTO</a>, 
 <a class="el" href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aa26472b2fc881f49a2c129be54b6cf03c">BTLV_DEPTH_NAVIGATION_STEP_OVER</a>, 
-<a class="el" href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aa674f328762f7108a632aaeb8c787ad74">BTLV_DEPTH_NAVIGATION_STEP_OUT</a>
+<a class="el" href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aa674f328762f7108a632aaeb8c787ad74">BTLV_DEPTH_NAVIGATION_STEP_OUT</a>, 
+<a class="el" href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aae79a37a869480ba092e53d14e2dfab8a">BTLV_DEPTH_NAVIGATION_HALT</a>
  }<tr class="memdesc:a4ef711a2aa9db498c9ef064a640b9c5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return codes for BTLV_objectPrintCallback.  <a href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5a">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:a4ef711a2aa9db498c9ef064a640b9c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,15 +157,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a539e937f26cce7927e6ceb9134dd9ce0"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#a539e937f26cce7927e6ceb9134dd9ce0">BTLV_getVersion</a> (void)</td></tr>
 <tr class="memdesc:a539e937f26cce7927e6ceb9134dd9ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the string of BTLV lib full version.  <a href="#a539e937f26cce7927e6ceb9134dd9ce0">More...</a><br /></td></tr>
 <tr class="separator:a539e937f26cce7927e6ceb9134dd9ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbe3c8c243cf634dddf3844fe4723b43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">BTLV_ReturnCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#afbe3c8c243cf634dddf3844fe4723b43">BTLV_decodeTlvObject</a> (const uint8_t *const tlvObjectBuffer, const size_t objectBufferSize, <a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> **decodedObject)</td></tr>
-<tr class="memdesc:afbe3c8c243cf634dddf3844fe4723b43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode a BER-TLV data object to a tree of TLV data objects.  <a href="#afbe3c8c243cf634dddf3844fe4723b43">More...</a><br /></td></tr>
-<tr class="separator:afbe3c8c243cf634dddf3844fe4723b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f58671baf1307efa1ce3dc3a0d426de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">BTLV_ReturnCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#a6f58671baf1307efa1ce3dc3a0d426de">BTLV_decodeTlvObject</a> (const uint8_t *const tlvObjectBuffer, const size_t objectBufferSize, <a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> **tlvDataObjectsArray, size_t *const tlvDataObjectsCount)</td></tr>
+<tr class="memdesc:a6f58671baf1307efa1ce3dc3a0d426de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode a BER-TLV data object to an array of Data Objects Trees.  <a href="#a6f58671baf1307efa1ce3dc3a0d426de">More...</a><br /></td></tr>
+<tr class="separator:a6f58671baf1307efa1ce3dc3a0d426de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9309c14aed366452ecf791d7c5c5e69f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">BTLV_ReturnCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#a9309c14aed366452ecf791d7c5c5e69f">BTLV_encodeTlvObject</a> (const <a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> *const object, uint8_t *const tlvObjectBuffer, const size_t objectBufferSize)</td></tr>
 <tr class="memdesc:a9309c14aed366452ecf791d7c5c5e69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a BER-TLV data object from tree of objects to block of bytes.  <a href="#a9309c14aed366452ecf791d7c5c5e69f">More...</a><br /></td></tr>
 <tr class="separator:a9309c14aed366452ecf791d7c5c5e69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2c62166dda82eb5820e535a9e53c55c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">BTLV_ReturnCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#af2c62166dda82eb5820e535a9e53c55c">BTLV_printObject</a> (const <a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> *const object)</td></tr>
 <tr class="memdesc:af2c62166dda82eb5820e535a9e53c55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard data object printing function.  <a href="#af2c62166dda82eb5820e535a9e53c55c">More...</a><br /></td></tr>
 <tr class="separator:af2c62166dda82eb5820e535a9e53c55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5330934cb955362a964cdbc04c3bedfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">BTLV_ReturnCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#a5330934cb955362a964cdbc04c3bedfc">BTLV_printObjectArray</a> (const <a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> *const objects, const size_t arraySize)</td></tr>
+<tr class="memdesc:a5330934cb955362a964cdbc04c3bedfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard data object array printing function.  <a href="#a5330934cb955362a964cdbc04c3bedfc">More...</a><br /></td></tr>
+<tr class="separator:a5330934cb955362a964cdbc04c3bedfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8237cbcb824bc781f10abd5c3abf235e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">BTLV_ReturnCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#a8237cbcb824bc781f10abd5c3abf235e">BTLV_depthFirstNavigateObject</a> (const <a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> *const object, const <a class="el" href="bertlv_8h.html#ab732a4107d70cc130da900212d5ce10b">BTLV_objectPrintCallback</a> printObjectCallback)</td></tr>
 <tr class="memdesc:a8237cbcb824bc781f10abd5c3abf235e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Navigates through a tree of data objects using the depth first approach.  <a href="#a8237cbcb824bc781f10abd5c3abf235e">More...</a><br /></td></tr>
 <tr class="separator:a8237cbcb824bc781f10abd5c3abf235e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,6 +178,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aa2d94a643535158fcbd23fdc82188e51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#aa2d94a643535158fcbd23fdc82188e51">BTLV_destroyTlvObject</a> (<a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> *const object)</td></tr>
 <tr class="memdesc:aa2d94a643535158fcbd23fdc82188e51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to recusively free data object properly and safely.  <a href="#aa2d94a643535158fcbd23fdc82188e51">More...</a><br /></td></tr>
 <tr class="separator:aa2d94a643535158fcbd23fdc82188e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c4c6d51bc1b3054e60ec9338515b4df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bertlv_8h.html#a8c4c6d51bc1b3054e60ec9338515b4df">BTLV_destroyTlvObjectArray</a> (<a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> *const objectArray, const size_t elementCount)</td></tr>
+<tr class="memdesc:a8c4c6d51bc1b3054e60ec9338515b4df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to destroy each object of given array and then finally destroy the array.  <a href="#a8c4c6d51bc1b3054e60ec9338515b4df">More...</a><br /></td></tr>
+<tr class="separator:a8c4c6d51bc1b3054e60ec9338515b4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>BER-TLV objects encoding/decoding API. </p>
@@ -235,6 +246,8 @@ Functions</h2></td></tr>
 <p>It does happen for those functions that need to allocate heap memory. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a0f22ff95c3eff0ff70b6e40823240e6baa325a1a168cc541f9cd791415833f9f2"></a>BTLV_SMALL_BUFFER&#160;</td><td class="fielddoc"><p>Output buffer was not enough to encode the whole data object. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0f22ff95c3eff0ff70b6e40823240e6ba54ec351cda8ca788e80a1874edee0b48"></a>BTLV_TYPE_OVERFLOW&#160;</td><td class="fielddoc"><p>An overflow of an integer type has occurred during TLV parsing. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a0f22ff95c3eff0ff70b6e40823240e6ba5f9dc6156f877615bb174a50f2bd42cc"></a>BTLV_BAD_TLV_ENCODING&#160;</td><td class="fielddoc"><p>Given encoded TLV byte block is encoded incorrectly. </p>
 </td></tr>
@@ -320,6 +333,8 @@ Functions</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a4ef711a2aa9db498c9ef064a640b9c5aa674f328762f7108a632aaeb8c787ad74"></a>BTLV_DEPTH_NAVIGATION_STEP_OUT&#160;</td><td class="fielddoc"><p>Ignores current data object nesting and subsequent data objects at current nesting level. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a4ef711a2aa9db498c9ef064a640b9c5aae79a37a869480ba092e53d14e2dfab8a"></a>BTLV_DEPTH_NAVIGATION_HALT&#160;</td><td class="fielddoc"><p>Interrupts the whole naviation at the point that halt was returned. </p>
+</td></tr>
 </table>
 
 </div>
@@ -346,8 +361,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afbe3c8c243cf634dddf3844fe4723b43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbe3c8c243cf634dddf3844fe4723b43">&#9670;&nbsp;</a></span>BTLV_decodeTlvObject()</h2>
+<a id="a6f58671baf1307efa1ce3dc3a0d426de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f58671baf1307efa1ce3dc3a0d426de">&#9670;&nbsp;</a></span>BTLV_decodeTlvObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -368,7 +383,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> **&#160;</td>
-          <td class="paramname"><em>decodedObject</em>&#160;</td>
+          <td class="paramname"><em>tlvDataObjectsArray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *const&#160;</td>
+          <td class="paramname"><em>tlvDataObjectsCount</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -378,13 +399,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Decode a BER-TLV data object to a tree of TLV data objects. </p>
-<p>Receives a BER-TLV data object encoded as block of bytes and decode it to a tree of BTLV_DataObject representing all the information encoded passed.</p>
+<p>Decode a BER-TLV data object to an array of Data Objects Trees. </p>
+<p>Receives a BER-TLV data object encoded as block of bytes and decode it to several trees of BTLV_DataObject representing all the information encoded passed. The output parameter tlvDataObjectsArray is an array of tree roots.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">tlvObjectBuffer</td><td>The address of the BER-TLV data object block of bytes in memory. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">objectBufferSize</td><td>Size of the data object block of bytes. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">decodedObject</td><td>Output parameter where to return the address of decoded data object. In case of failing to decode the object, outputs NULL.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">decodedObject</td><td>Output parameter where to return the address of decoded data object. Its an array of BTLV_DataObject, each data object representing a tree. In case of failing to decode the object, outputs NULL. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">tlvDataObjectsCount</td><td>Output parameter where to return the amount of elements in the array returned through parameter decodedObject. In case of failing, returns zero.</td></tr>
   </table>
   </dd>
 </dl>
@@ -394,7 +416,9 @@ Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments. </dd
 <dd>
 Returns BTLV_MEMORY_NOT_ENOUGH if it fails allocating memory during decoding of TLV object byte block. </dd>
 <dd>
-Returns BTLV_BAD_TLV_ENCODING if input TLV object byte block is bad encoded and the function fails to decode it. </dd></dl>
+Returns BTLV_BAD_TLV_ENCODING if input TLV object byte block is bad encoded and the function fails to decode it. </dd>
+<dd>
+Returns BTLV_TYPE_OVERFLOW if an integer type overflow occur during the parsing of given TLV data object. </dd></dl>
 
 </div>
 </div>
@@ -478,11 +502,48 @@ Returns BTLV_BAD_TLV_STRUCTURE if input TLV object tree is bad constructed. </dd
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns BTLV_RET_OK on success. </dd>
 <dd>
-Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments. </dd>
+Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments. </dd></dl>
+
+</div>
+</div>
+<a id="a5330934cb955362a964cdbc04c3bedfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5330934cb955362a964cdbc04c3bedfc">&#9670;&nbsp;</a></span>BTLV_printObjectArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">BTLV_ReturnCode</a> BTLV_printObjectArray </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> *const&#160;</td>
+          <td class="paramname"><em>objects</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>arraySize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Standard data object array printing function. </p>
+<p>Prints a given data object array in a default style. Basically calls BTLV_printObject for each data object in given array.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">object</td><td>Data object array to be printed. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arraySize</td><td>Number of elements of given array.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns BTLV_RET_OK on success. </dd>
 <dd>
-Returns BTLV_OUTPUT_STREAM_MISSING if there is no output stream available. </dd>
-<dd>
-Returns BTLV_PRINTING_BYTES_LOST if it was possible to print part of data object, but some parts were lost during printing. </dd></dl>
+Returns BTLV_INVALID_PARAMETER if some problem is found on given arguments. </dd></dl>
 
 </div>
 </div>
@@ -600,9 +661,47 @@ Returns BTLV_BAD_CALLBACK_COMMAND if callback function returns a control code th
 </div><div class="memdoc">
 
 <p>Try to recusively free data object properly and safely. </p>
+<p>The object itself is not deallocated.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">object</td><td>Reference to the data object that must be deallocated. </td></tr>
+    <tr><td class="paramname">object</td><td>Reference to the data object that must be destroyed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8c4c6d51bc1b3054e60ec9338515b4df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c4c6d51bc1b3054e60ec9338515b4df">&#9670;&nbsp;</a></span>BTLV_destroyTlvObjectArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BTLV_destroyTlvObjectArray </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">BTLV_DataObject</a> *const&#160;</td>
+          <td class="paramname"><em>objectArray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>elementCount</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Try to destroy each object of given array and then finally destroy the array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">objectArray</td><td>Reference to the data objectarray that must be deallocated. </td></tr>
+    <tr><td class="paramname">elementCount</td><td>Number of elements in given array </td></tr>
   </table>
   </dd>
 </dl>
@@ -612,7 +711,7 @@ Returns BTLV_BAD_CALLBACK_COMMAND if callback function returns a control code th
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 6 2021 23:18:46 for BTLV Lib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 10 2021 21:40:58 for BTLV Lib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

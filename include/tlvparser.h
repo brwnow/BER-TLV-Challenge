@@ -1,3 +1,12 @@
+/**
+ * @file tlvparser.h
+ * @brief Core header for parsing specific TLV objects fields. Not recommended to use this API directly
+ *
+ * You'd better use only bertlv.h header and its exposed API. This file and its functions are
+ * core functions for BTLV Lib working. Only use this directly if quite needed.
+ *
+ */
+
 #ifndef BTLV_LIB_TLV_PARSER_H
 #define BTLV_LIB_TLV_PARSER_H
 
