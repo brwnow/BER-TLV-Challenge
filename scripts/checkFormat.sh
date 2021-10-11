@@ -68,10 +68,11 @@ filesSearchDiff "include" "*.h"
 filesSearchDiff "src" "*.c"
 
 # Some tests headers and sources
-filesSearchDiff "tests" "tests.*"
+filesSearchDiff "tests" "tests.h"
+filesSearchDiff "tests" "tests.c"
 
 # Examples headers and sources
-filesSearchDiff "examples" "*.*"
+filesSearchDiff "examples" "*.c"
 
 showCheckingResult
 
