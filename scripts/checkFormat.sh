@@ -62,7 +62,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # BTLV Lib headers
-filesSearchDiff "include" "*.h"
+filesSearchDiff "src/include" "*.h"
 
 # BTLV Lib sources
 filesSearchDiff "src" "*.c"
