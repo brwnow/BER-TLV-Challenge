@@ -74,3 +74,9 @@ filesSearchDiff "tests" "tests.*"
 filesSearchDiff "examples" "*.*"
 
 showCheckingResult
+
+if [ $badFilesCounter -gt 0 ]; then
+    exit 1
+fi
+
+exit 0
