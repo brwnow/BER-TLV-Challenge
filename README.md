@@ -2,6 +2,8 @@
 
 A library handful for parsing and printing BER-TLV objects.
 
+![CI status](https://app.travis-ci.com/brwnow/BER-TLV-Challenge.svg?branch=develop)
+
 ## Summary
 1. [First steps after cloning](#first-steps-after-cloning)
 2. [Environment Setup](#environment-setup)
