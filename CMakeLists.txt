@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(btlv VERSION 0.0.2 DESCRIPTION "BER-TLV parsing library")
+project(btlv VERSION 0.0.3 DESCRIPTION "BER-TLV parsing library")
 
 option(BUILD_UNIT_TESTS "Enable/Disable build of unit tests" ON)
 option(BUILD_EXAMPLES "Enable/Disable build of lib usage examples" ON)

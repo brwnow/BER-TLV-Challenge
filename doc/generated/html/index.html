@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>BTLV Lib: Main Page</title>
+<title>BTLV Lib: INTRODUCTION</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BTLV Lib
-   &#160;<span id="projectnumber">0.0.2</span>
+   &#160;<span id="projectnumber">0.0.3</span>
    </div>
    <div id="projectbrief">Lib handful for encoding or decoding BER-TLV data objects</div>
   </td>
@@ -61,13 +61,34 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title">BTLV Lib Documentation</div>  </div>
+<div class="title">INTRODUCTION </div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><p>BTLV Lib is a simple and small lib to help parsing BER-TLV data objects. In this document you will find BTLV Lib API reference. For detailed information about lib API functions visit file <b><a class="el" href="bertlv_8h.html" title="BER-TLV objects encoding/decoding API. ">bertlv.h</a></b>.</p>
+<p>Although there is documentation for several headers files, it's recommended to use in your project only <b><a class="el" href="bertlv_8h.html" title="BER-TLV objects encoding/decoding API. ">bertlv.h</a></b> header file and the API exposed on it. The other header files are more for the core of lib implementation.</p>
+<h3>API Files</h3>
+<h4>Main Header</h4>
+<ul>
+<li><a class="el" href="bertlv_8h.html" title="BER-TLV objects encoding/decoding API. ">bertlv.h</a></li>
+</ul>
+<h4>Secondary Headers</h4>
+<ul>
+<li><a class="el" href="tlvparser_8h.html" title="Core header for parsing specific TLV objects fields. ">tlvparser.h</a></li>
+<li><a class="el" href="printinghelper_8h.html" title="Core header for helping on printing TLV objects. ">printinghelper.h</a></li>
+<li><a class="el" href="typehandler_8h.html" title="Core header for helping on casting byte blocks to C types. ">typehandler.h</a></li>
+</ul>
+<h3>Examples</h3>
+<p>You can find usage examples for BTLV Lib in the project repository. Take a look that the folder examples, at the root of the project folder, there are several usage examples that may help you quickstart on BTLV Lib usage.</p>
+<h3>Basic instruction</h3>
+<p>BTLV Lib does not protect its function for thread safety for the sake of keep its implementation as simple as possible, also avoid portability issues. So when using the lib API, consider that the lib's user must guarantee thread safety for all data given to lib's API.</p>
+<p>Most important functions of lib's API are <code>BTLV_decodeTlvObject</code>, <code>BTLV_depthFirstNavigateObject</code> and <code>BTLV_destroyTlvObjectArray</code>.</p>
+<p>With <code>BTLV_decodeTlvObject</code> you can parse a BER-TLV data object. It returns an array of data objects through an output parameter. This decision was made as a handful resource to parse at once a memory block that contains more than one data object. This way the given memory block is parsed whole at once and the algorithm extract all data objects that was encoded in that.</p>
+<p>With <code>BTLV_depthFirstNavigateObject</code> in conjuntction with a callback function (check <code>BTLV_objectPrintCallback</code> documentation) you can navigatin each of the data objects returned by <code>BTLV_decodeTlvObject</code>. This callback has an signture that give the lib's user controls over the navigation through return codes (which are commands to the navigator algorithm).</p>
+<p>And for the last, with <code>BTLV_destroyTlvObjectArray</code> you can free all memory that was allocated by <code>BTLV_decodeTlvObject</code> at once. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 10 2021 21:40:58 for BTLV Lib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 11 2021 03:48:10 for BTLV Lib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
