@@ -33,43 +33,20 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 configure_file(btlvConfig.h.in btlvConfig.h)
 
 set(BTLV_HEADERS_PATH
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-set(BTLV_SOURCES_PATH
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/include
 )
 
 set(BTLV_INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/libbtlv/${CMAKE_BUILD_TYPE_LOWERCASE})
 
-add_library(btlv SHARED
-    ${BTLV_SOURCES_PATH}/bertlv.c
-    ${BTLV_SOURCES_PATH}/tlvparser.c
-    ${BTLV_SOURCES_PATH}/architecture/typehandler.c
-    ${BTLV_SOURCES_PATH}/io/printinghelper.c
-)
+# BTLV Lib sources dir
+add_subdirectory(src)
 
-set_target_properties(btlv PROPERTIES VERSION ${PROJECT_VERSION})
-set_target_properties(btlv PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-set_target_properties(btlv PROPERTIES PUBLIC_HEADER ${BTLV_HEADERS_PATH}/bertlv.h)
-
-if(MSVC)
-    target_compile_options(btlv PRIVATE /W4 /WX)
-else()
-    target_compile_options(btlv PRIVATE -Wall -Wextra -Wpedantic -Werror)
-endif()
-
-target_include_directories(btlv PRIVATE "${PROJECT_BINARY_DIR}" "${BTLV_HEADERS_PATH}")
-
-install(TARGETS btlv
-    LIBRARY DESTINATION ${BTLV_INSTALL_PATH}
-    PUBLIC_HEADER DESTINATION ${BTLV_INSTALL_PATH}/include
-)
-
+# Tests dir, if enabled
 if(${BUILD_UNIT_TESTS})
     add_subdirectory(tests)
 endif()
 
+# Examples dir, if enabled
 if(${BUILD_EXAMPLES})
     add_subdirectory(examples)
 endif()
