@@ -18,6 +18,7 @@ A library handful for parsing and printing BER-TLV objects.
 6. [Testing](#testing)
 7. [Version Bumping](#version-bumping)
 8. [Contributing](#contributing)
+9. [CI/CD](#cicd)
 
 ## First steps after cloning
 
@@ -85,7 +86,7 @@ There are unit tests implemented for most of BTLV Lib functions. In order to tes
 
 ## Version Bumping
 
-Version bumping is quite simple, just update the version of the project at `CMakeLists.txt` at the root of the project and `PROJECT_NUMBER` at `doc/Doxyfile` to the new version.
+Version bumping is quite simple, just update the version of the project at `CMakeLists.txt` at the root of the project and `PROJECT_NUMBER` at `doc/Doxyfile` to the new version and generated the documentation again (check [API Documentation](#api-documentation) section).
 
 ## Contributing
 
@@ -103,3 +104,15 @@ Following there is the types of branches to work on worfkflow of this project:
 * **features** `feature/branchNameCamelCased` branches for new features or update/refactor of existing features
 * **bugfix** `bugfix/branchNameCamelCased` branches for bugfix that will be merged into `develop` branch
 * **hotfix** `hotfix/branchNameCamelCased` branches for bugfix that will be opened from and merged dinto `main` branch (a cherry-pick to develop may occurr). This is used when some bugfix is quite important to fix a critical bug.
+
+## CI/CD
+
+For while it's only CI, there is no CD yet.
+
+CI performs some verifications before allowing a pull request to be merged. Following there is a list of verifications CI performs
+
+* **Sources files linting** check if for some reason the files bypassed the githook for pre-push which run the checkFormat script to guarantee that everything is being pushed is well formatted.
+* **Building** check if project is building before allowing the PR to be merged.
+* **Running Tests** check if unit tests are passing before allowing the PR to be merged.
+
+At the beginning of this README you can find the CI status for develop branch.
