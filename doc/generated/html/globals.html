@@ -22,9 +22,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BTLV Lib
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">0.0.2</span>
    </div>
-   <div id="projectbrief">LibhandfulforencodingordecodingBER-TLVdataobjects</div>
+   <div id="projectbrief">Lib handful for encoding or decoding BER-TLV data objects</div>
   </td>
  </tr>
  </tbody>
@@ -75,6 +75,9 @@ $(function() {
 <li>BTLV_blockOfBytesNavigateObject()
 : <a class="el" href="bertlv_8h.html#a8038d4e1930001eee3daa73f0fc0c5e1">bertlv.h</a>
 </li>
+<li>BTLV_castBigEndianBlockToSizeT()
+: <a class="el" href="typehandler_8h.html#add7a3647527345bc88d3186eca7158e4">typehandler.h</a>
+</li>
 <li>BTLV_CLASS_APPLICATION
 : <a class="el" href="bertlv_8h.html#a81b0e867427b7599dce580cf65c53be6accc8764ad7ded27e5b3add44fb7d1e5c">bertlv.h</a>
 </li>
@@ -94,7 +97,10 @@ $(function() {
 : <a class="el" href="bertlv_8h.html#a848cfb2882e69cd6101383f49f7d747d">bertlv.h</a>
 </li>
 <li>BTLV_decodeTlvObject()
-: <a class="el" href="bertlv_8h.html#afbe3c8c243cf634dddf3844fe4723b43">bertlv.h</a>
+: <a class="el" href="bertlv_8h.html#a6f58671baf1307efa1ce3dc3a0d426de">bertlv.h</a>
+</li>
+<li>BTLV_DEPTH_NAVIGATION_HALT
+: <a class="el" href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aae79a37a869480ba092e53d14e2dfab8a">bertlv.h</a>
 </li>
 <li>BTLV_DEPTH_NAVIGATION_STEP_INTO
 : <a class="el" href="bertlv_8h.html#a4ef711a2aa9db498c9ef064a640b9c5aaa8e05cec58bb69a909bc72faf6b0b021">bertlv.h</a>
@@ -111,17 +117,26 @@ $(function() {
 <li>BTLV_destroyTlvObject()
 : <a class="el" href="bertlv_8h.html#aa2d94a643535158fcbd23fdc82188e51">bertlv.h</a>
 </li>
+<li>BTLV_destroyTlvObjectArray()
+: <a class="el" href="bertlv_8h.html#a8c4c6d51bc1b3054e60ec9338515b4df">bertlv.h</a>
+</li>
 <li>BTLV_encodeTlvObject()
 : <a class="el" href="bertlv_8h.html#a9309c14aed366452ecf791d7c5c5e69f">bertlv.h</a>
 </li>
 <li>BTLV_GENERIC_ERROR
 : <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba1ec55fc80642a9698115588b8920e84d">bertlv.h</a>
 </li>
+<li>BTLV_getDefaultNavigatorPrinter()
+: <a class="el" href="printinghelper_8h.html#aecb26ec52a382183d5a2ec7cc1e8be2b">printinghelper.h</a>
+</li>
 <li>BTLV_getVersion()
 : <a class="el" href="bertlv_8h.html#a539e937f26cce7927e6ceb9134dd9ce0">bertlv.h</a>
 </li>
 <li>BTLV_INVALID_PARAMETER
 : <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baefcda45362b385fcd9bd29b33b233dc3">bertlv.h</a>
+</li>
+<li>BTLV_lengthFieldParse()
+: <a class="el" href="tlvparser_8h.html#ac0dd88bf2aa627c400c9a5ad30a92b20">tlvparser.h</a>
 </li>
 <li>BTLV_MEMORY_NOT_ENOUGH
 : <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6bad480f2e0bacf767721df6eee4601c4aa">bertlv.h</a>
@@ -150,20 +165,38 @@ $(function() {
 <li>BTLV_printObject()
 : <a class="el" href="bertlv_8h.html#af2c62166dda82eb5820e535a9e53c55c">bertlv.h</a>
 </li>
+<li>BTLV_printObjectArray()
+: <a class="el" href="bertlv_8h.html#a5330934cb955362a964cdbc04c3bedfc">bertlv.h</a>
+</li>
 <li>BTLV_RET_OK
 : <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba8f71a0a7cfbe90ca85548f58875813dc">bertlv.h</a>
 </li>
 <li>BTLV_ReturnCode
 : <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6b">bertlv.h</a>
 </li>
+<li>BTLV_setDefaultNavigatorPrinterElementSpacing()
+: <a class="el" href="printinghelper_8h.html#ae2523b9c11a8e642d5a597a2ddb49ff1">printinghelper.h</a>
+</li>
+<li>BTLV_setDefaultNavigatorPrinterLineSpacing()
+: <a class="el" href="printinghelper_8h.html#ac2e786471bc6d12946165ae667d5b9a3">printinghelper.h</a>
+</li>
+<li>BTLV_setDefaultNavigatorPrinterTabSize()
+: <a class="el" href="printinghelper_8h.html#a24a7ffe047368bf31d7ca6f17563797f">printinghelper.h</a>
+</li>
 <li>BTLV_SMALL_BUFFER
 : <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6baa325a1a168cc541f9cd791415833f9f2">bertlv.h</a>
+</li>
+<li>BTLV_tagFieldParse()
+: <a class="el" href="tlvparser_8h.html#a7a968a7490a132a7d26a3078f4e48f34">tlvparser.h</a>
+</li>
+<li>BTLV_TYPE_OVERFLOW
+: <a class="el" href="bertlv_8h.html#a0f22ff95c3eff0ff70b6e40823240e6ba54ec351cda8ca788e80a1874edee0b48">bertlv.h</a>
 </li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 6 2021 23:18:46 for BTLV Lib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 10 2021 21:40:58 for BTLV Lib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
